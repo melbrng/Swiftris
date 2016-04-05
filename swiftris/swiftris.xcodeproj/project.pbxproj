@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64671CB45DCC00DFCB2A /* Array2D.swift */; };
 		439E71771C77C9F00052530A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E71761C77C9F00052530A /* AppDelegate.swift */; };
-		439E71791C77C9F00052530A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439E71781C77C9F00052530A /* GameScene.sks */; };
 		439E717B1C77C9F00052530A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717A1C77C9F00052530A /* GameScene.swift */; };
 		439E717D1C77C9F00052530A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717C1C77C9F00052530A /* GameViewController.swift */; };
 		439E71801C77C9F00052530A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439E717E1C77C9F00052530A /* Main.storyboard */; };
@@ -16,6 +16,18 @@
 		439E71851C77C9F00052530A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439E71831C77C9F00052530A /* LaunchScreen.storyboard */; };
 		439E71901C77C9F00052530A /* swiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E718F1C77C9F00052530A /* swiftrisTests.swift */; };
 		439E719B1C77C9F00052530A /* swiftrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E719A1C77C9F00052530A /* swiftrisUITests.swift */; };
+		439E71AE1C77D0D70052530A /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 439E71A91C77D0D70052530A /* bomb.mp3 */; };
+		439E71AF1C77D0D70052530A /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 439E71AA1C77D0D70052530A /* drop.mp3 */; };
+		439E71B01C77D0D70052530A /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 439E71AB1C77D0D70052530A /* gameover.mp3 */; };
+		439E71B11C77D0D70052530A /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 439E71AC1C77D0D70052530A /* levelup.mp3 */; };
+		439E71B21C77D0D70052530A /* theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 439E71AD1C77D0D70052530A /* theme.mp3 */; };
+		439E71B41C77D0E80052530A /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B31C77D0E80052530A /* Sprites.atlas */; };
+		439E71BC1C77D17A0052530A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B61C77D17A0052530A /* background.png */; };
+		439E71BD1C77D17A0052530A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B71C77D17A0052530A /* background@2x.png */; };
+		439E71BE1C77D17A0052530A /* gameboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B81C77D17A0052530A /* gameboard.png */; };
+		439E71BF1C77D17A0052530A /* gameboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B91C77D17A0052530A /* gameboard@2x.png */; };
+		439E71C01C77D17A0052530A /* whitebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71BA1C77D17A0052530A /* whitebg.png */; };
+		439E71C11C77D17A0052530A /* whitebg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71BB1C77D17A0052530A /* whitebg@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		438F64671CB45DCC00DFCB2A /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		439E71731C77C9F00052530A /* swiftris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E71761C77C9F00052530A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		439E71781C77C9F00052530A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		439E717A1C77C9F00052530A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		439E717C1C77C9F00052530A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		439E717F1C77C9F00052530A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +63,18 @@
 		439E71961C77C9F00052530A /* swiftrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E719A1C77C9F00052530A /* swiftrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftrisUITests.swift; sourceTree = "<group>"; };
 		439E719C1C77C9F00052530A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		439E71A91C77D0D70052530A /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
+		439E71AA1C77D0D70052530A /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
+		439E71AB1C77D0D70052530A /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
+		439E71AC1C77D0D70052530A /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
+		439E71AD1C77D0D70052530A /* theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme.mp3; sourceTree = "<group>"; };
+		439E71B31C77D0E80052530A /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
+		439E71B61C77D17A0052530A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		439E71B71C77D17A0052530A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		439E71B81C77D17A0052530A /* gameboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameboard.png; sourceTree = "<group>"; };
+		439E71B91C77D17A0052530A /* gameboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameboard@2x.png"; sourceTree = "<group>"; };
+		439E71BA1C77D17A0052530A /* whitebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebg.png; sourceTree = "<group>"; };
+		439E71BB1C77D17A0052530A /* whitebg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitebg@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +105,7 @@
 		439E716A1C77C9EF0052530A = {
 			isa = PBXGroup;
 			children = (
+				439E71B51C77D17A0052530A /* Images */,
 				439E71751C77C9F00052530A /* swiftris */,
 				439E718E1C77C9F00052530A /* swiftrisTests */,
 				439E71991C77C9F00052530A /* swiftrisUITests */,
@@ -102,13 +127,14 @@
 			isa = PBXGroup;
 			children = (
 				439E71761C77C9F00052530A /* AppDelegate.swift */,
-				439E71781C77C9F00052530A /* GameScene.sks */,
 				439E717A1C77C9F00052530A /* GameScene.swift */,
 				439E717C1C77C9F00052530A /* GameViewController.swift */,
+				438F64671CB45DCC00DFCB2A /* Array2D.swift */,
 				439E717E1C77C9F00052530A /* Main.storyboard */,
 				439E71811C77C9F00052530A /* Assets.xcassets */,
 				439E71831C77C9F00052530A /* LaunchScreen.storyboard */,
 				439E71861C77C9F00052530A /* Info.plist */,
+				439E71A81C77D0D70052530A /* Sounds */,
 			);
 			path = swiftris;
 			sourceTree = "<group>";
@@ -129,6 +155,32 @@
 				439E719C1C77C9F00052530A /* Info.plist */,
 			);
 			path = swiftrisUITests;
+			sourceTree = "<group>";
+		};
+		439E71A81C77D0D70052530A /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				439E71B31C77D0E80052530A /* Sprites.atlas */,
+				439E71A91C77D0D70052530A /* bomb.mp3 */,
+				439E71AA1C77D0D70052530A /* drop.mp3 */,
+				439E71AB1C77D0D70052530A /* gameover.mp3 */,
+				439E71AC1C77D0D70052530A /* levelup.mp3 */,
+				439E71AD1C77D0D70052530A /* theme.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		439E71B51C77D17A0052530A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				439E71B61C77D17A0052530A /* background.png */,
+				439E71B71C77D17A0052530A /* background@2x.png */,
+				439E71B81C77D17A0052530A /* gameboard.png */,
+				439E71B91C77D17A0052530A /* gameboard@2x.png */,
+				439E71BA1C77D17A0052530A /* whitebg.png */,
+				439E71BB1C77D17A0052530A /* whitebg@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +251,7 @@
 				TargetAttributes = {
 					439E71721C77C9F00052530A = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = WFBXYH99LH;
 					};
 					439E718A1C77C9F00052530A = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -235,9 +288,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				439E71791C77C9F00052530A /* GameScene.sks in Resources */,
 				439E71851C77C9F00052530A /* LaunchScreen.storyboard in Resources */,
+				439E71BD1C77D17A0052530A /* background@2x.png in Resources */,
+				439E71C01C77D17A0052530A /* whitebg.png in Resources */,
+				439E71BF1C77D17A0052530A /* gameboard@2x.png in Resources */,
+				439E71BE1C77D17A0052530A /* gameboard.png in Resources */,
+				439E71BC1C77D17A0052530A /* background.png in Resources */,
+				439E71AF1C77D0D70052530A /* drop.mp3 in Resources */,
+				439E71C11C77D17A0052530A /* whitebg@2x.png in Resources */,
+				439E71B21C77D0D70052530A /* theme.mp3 in Resources */,
+				439E71B01C77D0D70052530A /* gameover.mp3 in Resources */,
 				439E71821C77C9F00052530A /* Assets.xcassets in Resources */,
+				439E71B11C77D0D70052530A /* levelup.mp3 in Resources */,
+				439E71B41C77D0E80052530A /* Sprites.atlas in Resources */,
+				439E71AE1C77D0D70052530A /* bomb.mp3 in Resources */,
 				439E71801C77C9F00052530A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				439E717B1C77C9F00052530A /* GameScene.swift in Sources */,
+				438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */,
 				439E717D1C77C9F00052530A /* GameViewController.swift in Sources */,
 				439E71771C77C9F00052530A /* AppDelegate.swift in Sources */,
 			);
@@ -405,10 +470,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = swiftris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = melbo.co.swiftris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -416,10 +484,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = swiftris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = melbo.co.swiftris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -492,6 +563,7 @@
 				439E71A11C77C9F00052530A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		439E71A21C77C9F00052530A /* Build configuration list for PBXNativeTarget "swiftrisTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +572,7 @@
 				439E71A41C77C9F00052530A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		439E71A51C77C9F00052530A /* Build configuration list for PBXNativeTarget "swiftrisUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +581,7 @@
 				439E71A71C77C9F00052530A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
