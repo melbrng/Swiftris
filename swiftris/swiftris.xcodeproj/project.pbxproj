@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64671CB45DCC00DFCB2A /* Array2D.swift */; };
+		438F646A1CB4745800DFCB2A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64691CB4745800DFCB2A /* Block.swift */; };
 		439E71771C77C9F00052530A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E71761C77C9F00052530A /* AppDelegate.swift */; };
 		439E717B1C77C9F00052530A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717A1C77C9F00052530A /* GameScene.swift */; };
 		439E717D1C77C9F00052530A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717C1C77C9F00052530A /* GameViewController.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		438F64671CB45DCC00DFCB2A /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
+		438F64691CB4745800DFCB2A /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		439E71731C77C9F00052530A /* swiftris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E71761C77C9F00052530A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439E717A1C77C9F00052530A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				439E71831C77C9F00052530A /* LaunchScreen.storyboard */,
 				439E71861C77C9F00052530A /* Info.plist */,
 				439E71A81C77D0D70052530A /* Sounds */,
+				438F64691CB4745800DFCB2A /* Block.swift */,
 			);
 			path = swiftris;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			files = (
 				439E717B1C77C9F00052530A /* GameScene.swift in Sources */,
 				438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */,
+				438F646A1CB4745800DFCB2A /* Block.swift in Sources */,
 				439E717D1C77C9F00052530A /* GameViewController.swift in Sources */,
 				439E71771C77C9F00052530A /* AppDelegate.swift in Sources */,
 			);
