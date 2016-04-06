@@ -15,6 +15,7 @@ import SpriteKit
 //Use the forced form of the type cast operator (as!) only when you are sure that the downcast will always succeed. This form of the operator will trigger a runtime error if you try to downcast to an incorrect class type.
 
 var scene: GameScene!
+var swiftris:Swiftris!
 
 class GameViewController: UIViewController
 {
@@ -34,8 +35,21 @@ class GameViewController: UIViewController
         scene = GameScene(size: skView.bounds.size)
         scene.scaleMode = .AspectFill
         
+        scene.tick = didTick
+        swiftris = Swiftris()
+        swiftris.beginGame()
+        
         // Present the scene.
         skView.presentScene(scene)
+        
+        scene.addPreviewShapeToScene(swiftris.nextShape!) {
+            swiftris.nextShape?.moveTo(StartingColumn, row: StartingRow)
+            scene.movePreviewShape(swiftris.nextShape!) {
+                let nextShapes = swiftris.newShape()
+                scene.startTicking()
+                scene.addPreviewShapeToScene(nextShapes.nextShape!) {}
+            }
+        }
 
     }
 
@@ -43,5 +57,11 @@ class GameViewController: UIViewController
     override func prefersStatusBarHidden() -> Bool
     {
         return true
+    }
+    
+    func didTick()
+    {
+        swiftris.fallingShape?.lowerShapeByOneRow()
+        scene.redrawShape(swiftris.fallingShape!, completion: {})
     }
 }

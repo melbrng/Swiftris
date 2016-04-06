@@ -17,6 +17,7 @@
 		438F64761CB47EBF00DFCB2A /* JShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64751CB47EBF00DFCB2A /* JShape.swift */; };
 		438F64781CB47ED400DFCB2A /* SShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64771CB47ED400DFCB2A /* SShape.swift */; };
 		438F647A1CB47EE900DFCB2A /* ZShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64791CB47EE900DFCB2A /* ZShape.swift */; };
+		438F647C1CB47FF100DFCB2A /* Swiftris.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F647B1CB47FF100DFCB2A /* Swiftris.swift */; };
 		439E71771C77C9F00052530A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E71761C77C9F00052530A /* AppDelegate.swift */; };
 		439E717B1C77C9F00052530A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717A1C77C9F00052530A /* GameScene.swift */; };
 		439E717D1C77C9F00052530A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E717C1C77C9F00052530A /* GameViewController.swift */; };
@@ -67,6 +68,7 @@
 		438F64751CB47EBF00DFCB2A /* JShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JShape.swift; sourceTree = "<group>"; };
 		438F64771CB47ED400DFCB2A /* SShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SShape.swift; sourceTree = "<group>"; };
 		438F64791CB47EE900DFCB2A /* ZShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZShape.swift; sourceTree = "<group>"; };
+		438F647B1CB47FF100DFCB2A /* Swiftris.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swiftris.swift; sourceTree = "<group>"; };
 		439E71731C77C9F00052530A /* swiftris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E71761C77C9F00052530A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439E717A1C77C9F00052530A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				438F64751CB47EBF00DFCB2A /* JShape.swift */,
 				438F64771CB47ED400DFCB2A /* SShape.swift */,
 				438F64791CB47EE900DFCB2A /* ZShape.swift */,
+				438F647B1CB47FF100DFCB2A /* Swiftris.swift */,
 			);
 			path = swiftris;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				438F646E1CB47DCF00DFCB2A /* SquareShape.swift in Sources */,
 				439E717B1C77C9F00052530A /* GameScene.swift in Sources */,
 				438F64761CB47EBF00DFCB2A /* JShape.swift in Sources */,
+				438F647C1CB47FF100DFCB2A /* Swiftris.swift in Sources */,
 				438F646C1CB478E000DFCB2A /* Shape.swift in Sources */,
 				438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */,
 				438F64721CB47E8C00DFCB2A /* LineShape.swift in Sources */,
