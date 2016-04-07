@@ -14,9 +14,9 @@ class Array2D<T>
     let columns: Int
     let rows: Int
     
-    // #2
     // declare the swift array and declare with an optional type (optional may or may not contain data and in fact be nil or empty
     // nil locations found on the game board represent empty spots where no block is present
+    // typed parameter <T> allows our array to store any data type and remain general purpose
     var array: Array<T?>
     
     init(columns: Int, rows: Int)
@@ -24,12 +24,11 @@ class Array2D<T>
         self.columns = columns
         self.rows = rows
         
-        // #3
         // instantiate our array
+        // create array of certain size with all of its values set to the same default value ( repeatedValue )
         array = Array<T?>(count:rows * columns, repeatedValue: nil)
     }
     
-    // #4
     // custom subscript for  Array2D
     // subscript are shortcuts for accessing member elements of a collection,list or sequence
     subscript(column: Int, row: Int) -> T?

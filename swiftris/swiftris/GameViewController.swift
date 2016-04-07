@@ -28,6 +28,8 @@ class GameViewController: UIViewController
         // Configure the view.
         //The as! operator is a forced downcast. The view object is of type SKView, but before downcasting, our code treated it like a basic UIView. Without downcasting, we are unable to access SKView methods and properties, such as presentScene(SKScene).
         
+        //because SKView is a subclass of View , downcast in order to be able to access properties
+        //??? Why downcast ??? Why not declare SKView instead ???
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         

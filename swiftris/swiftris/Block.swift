@@ -8,7 +8,6 @@
 
 import SpriteKit
 
-
 let NumberOfColors: UInt32 = 6
 
 //enumeration is type of Int and implements CustomStringConvertible

@@ -122,6 +122,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		438F647D1CB57A1600DFCB2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				438F646B1CB478E000DFCB2A /* Shape.swift */,
+				438F646D1CB47DCF00DFCB2A /* SquareShape.swift */,
+				438F646F1CB47E7500DFCB2A /* TShape.swift */,
+				438F64711CB47E8C00DFCB2A /* LineShape.swift */,
+				438F64731CB47EA400DFCB2A /* LShape.swift */,
+				438F64751CB47EBF00DFCB2A /* JShape.swift */,
+				438F64771CB47ED400DFCB2A /* SShape.swift */,
+				438F64791CB47EE900DFCB2A /* ZShape.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		439E716A1C77C9EF0052530A = {
 			isa = PBXGroup;
 			children = (
@@ -146,25 +161,18 @@
 		439E71751C77C9F00052530A /* swiftris */ = {
 			isa = PBXGroup;
 			children = (
-				439E71761C77C9F00052530A /* AppDelegate.swift */,
 				439E717A1C77C9F00052530A /* GameScene.swift */,
+				439E71761C77C9F00052530A /* AppDelegate.swift */,
 				439E717C1C77C9F00052530A /* GameViewController.swift */,
 				438F64671CB45DCC00DFCB2A /* Array2D.swift */,
+				438F64691CB4745800DFCB2A /* Block.swift */,
+				438F647B1CB47FF100DFCB2A /* Swiftris.swift */,
+				438F647D1CB57A1600DFCB2A /* Model */,
 				439E717E1C77C9F00052530A /* Main.storyboard */,
 				439E71811C77C9F00052530A /* Assets.xcassets */,
 				439E71831C77C9F00052530A /* LaunchScreen.storyboard */,
 				439E71861C77C9F00052530A /* Info.plist */,
 				439E71A81C77D0D70052530A /* Sounds */,
-				438F64691CB4745800DFCB2A /* Block.swift */,
-				438F646B1CB478E000DFCB2A /* Shape.swift */,
-				438F646D1CB47DCF00DFCB2A /* SquareShape.swift */,
-				438F646F1CB47E7500DFCB2A /* TShape.swift */,
-				438F64711CB47E8C00DFCB2A /* LineShape.swift */,
-				438F64731CB47EA400DFCB2A /* LShape.swift */,
-				438F64751CB47EBF00DFCB2A /* JShape.swift */,
-				438F64771CB47ED400DFCB2A /* SShape.swift */,
-				438F64791CB47EE900DFCB2A /* ZShape.swift */,
-				438F647B1CB47FF100DFCB2A /* Swiftris.swift */,
 			);
 			path = swiftris;
 			sourceTree = "<group>";

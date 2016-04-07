@@ -9,6 +9,19 @@
 // renders the Tetrominos, the background, and the game board
 // responsible for playing the sounds and keeping track of the time
 
+//SPRITEKIT - Graphics rendering and animation infrastructure
+//Use to animate images (Sprites)
+//Traditional rendering loop where contents of each frame is processed before the frame is rendered
+//The game determines the contents of the scene and how those contents change in each frame
+//SpriteKit renders frames of animation efficiently using graphics hardware
+//Position of the sprites can be changed arbitrarily in each frame of animation
+
+//Scenes(SKScene) are presented inside a View (SKView)
+//place view inside window and render content to it
+//Scenes:
+// - hold sprites and other content
+// - implements per frame logic and processing
+
 import SpriteKit
 
 //SLOWEST speed at which our shapes will travel
@@ -20,7 +33,11 @@ let BlockSize:CGFloat = 20.0
 class GameScene: SKScene
     
 {
-    
+    //nodes are the fundamental building blocks for all content
+    //scene is the root node
+    //scene and its descendents determine which content is drawn and how it is rendered
+    //SKNode does not draw anything, rather applies it properties to its descendants
+    //all nodes are responder objects ( respond to user input )
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
     let LayerPosition = CGPoint(x: 6,y: -6)
@@ -30,7 +47,7 @@ class GameScene: SKScene
     //a closure that takes no parameters and returns nothing...and its optional
     var tick:(() -> ())?
     
-    //GAmeScene's current tick length
+    //GameScene's current tick length
     var tickLengthMillis = TickLengthLevelOne
     
     //last time we experienced a tick
@@ -53,13 +70,13 @@ class GameScene: SKScene
         
         //create node capable of displaying our background image
         //let cannot be reassigned
+        //SKSpriteNote is a SKNode that draws a textured image, colored square, textured image blended with color
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
         background.anchorPoint = CGPoint(x: 0, y: 1.0)
         addChild(background)
         
         addChild(gameLayer)
-        
         
         let gameBoardTexture = SKTexture(imageNamed: "gameboard")
         let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
