@@ -90,6 +90,7 @@ class GameScene: SKScene
         
     }
     
+    //called whenever a scene is presented in a view
     override func didMoveToView(view: SKView)
     {
         

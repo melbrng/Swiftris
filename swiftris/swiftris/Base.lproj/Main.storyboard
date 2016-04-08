@@ -17,9 +17,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lBp-AA-pHD" appends="YES" id="0Lo-oY-lg3"/>
+                            <outletCollection property="gestureRecognizers" destination="Zjh-6d-JmD" appends="YES" id="elb-Sd-R4i"/>
+                            <outletCollection property="gestureRecognizers" destination="jH3-Hl-Siw" appends="YES" id="3am-0Q-dqy"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="lBp-AA-pHD">
+                    <connections>
+                        <action selector="didTap:" destination="BV1-FR-VrT" id="oPH-Dx-KAn"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="Pbn-83-om0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Zjh-6d-JmD">
+                    <connections>
+                        <action selector="didPan:" destination="BV1-FR-VrT" id="Oqr-er-SUG"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="5eT-UJ-QZY"/>
+                    </connections>
+                </panGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="jH3-Hl-Siw">
+                    <connections>
+                        <action selector="didSwipe:" destination="BV1-FR-VrT" id="3Pt-7H-LSV"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="hsS-Zn-XA4"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="286" y="118"/>
         </scene>
