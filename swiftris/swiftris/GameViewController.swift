@@ -21,6 +21,9 @@ var panPointReference:CGPoint?
 class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizerDelegate
 {
 
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -85,21 +88,29 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         }
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool
+    {
         return true
     }
     
-    // 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer is UISwipeGestureRecognizer {
-            if otherGestureRecognizer is UIPanGestureRecognizer {
-                return true
-            }
-        } else if gestureRecognizer is UIPanGestureRecognizer {
-            if otherGestureRecognizer is UITapGestureRecognizer {
+    // fail other gesture if choose
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool
+    {
+        if gestureRecognizer is UISwipeGestureRecognizer
+        {
+            if otherGestureRecognizer is UIPanGestureRecognizer
+            {
                 return true
             }
         }
+        else if gestureRecognizer is UIPanGestureRecognizer
+        {
+            if otherGestureRecognizer is UITapGestureRecognizer
+            {
+                return true
+            }
+        }
+        
         return false
     }
     
@@ -125,41 +136,96 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     }
     
     func gameDidBegin(swiftris: Swiftris) {
+        
+        //reset the score and level labels and the speed at which the ticks occur
+        levelLabel.text = "\(swiftris.level)"
+        scoreLabel.text = "\(swiftris.score)"
+        scene.tickLengthMillis = TickLengthLevelOne
+        
         // The following is false when restarting a new game
-        if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
-            scene.addPreviewShapeToScene(swiftris.nextShape!) {
+        if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil
+        {
+            scene.addPreviewShapeToScene(swiftris.nextShape!)
+            {
                 self.nextShape()
             }
+        }
+        else
+        {
+            nextShape()
+        }
+    }
+    
+    func gameDidEnd(swiftris: Swiftris)
+    {
+        view.userInteractionEnabled = false
+        scene.stopTicking()
+        
+        //game ends play game over sound
+        scene.playSound("gameover.mp3")
+        
+        //then destroy the remaining blocks on the screen
+        scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
+        {
+            swiftris.beginGame()
+        }
+    }
+    
+    //as players level up will decrease tick level
+    func gameDidLevelUp(swiftris: Swiftris)
+    {
+        levelLabel.text = "\(swiftris.level)"
+        
+        if scene.tickLengthMillis >= 100
+        {
+            scene.tickLengthMillis -= 100
+        }
+        else if scene.tickLengthMillis > 50
+        {
+            scene.tickLengthMillis -= 50
+        }
+        
+        scene.playSound("levelup.mp3")
+    }
+    
+    //hear efforts
+    func gameShapeDidDrop(swiftris: Swiftris)
+    {
+        
+        scene.stopTicking()
+        
+        scene.redrawShape(swiftris.fallingShape!)
+        {
+            swiftris.letShapeFall()
+        }
+        
+        scene.playSound("drop.mp3")
+        
+    }
+    
+    func gameShapeDidLand(swiftris: Swiftris)
+    {
+        scene.stopTicking()
+        self.view.userInteractionEnabled = false
+        
+        // #10
+        let removedLines = swiftris.removeCompletedLines()
+        if removedLines.linesRemoved.count > 0 {
+            self.scoreLabel.text = "\(swiftris.score)"
+            scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks)
+            {
+                // #11
+                self.gameShapeDidLand(swiftris)
+            }
+            scene.playSound("Sounds/bomb.mp3")
         } else {
             nextShape()
         }
     }
     
-    func gameDidEnd(swiftris: Swiftris) {
-        view.userInteractionEnabled = false
-        scene.stopTicking()
-    }
-    
-    func gameDidLevelUp(swiftris: Swiftris) {
-        
-    }
-    
-    func gameShapeDidDrop(swiftris: Swiftris) {
-        
-        scene.stopTicking()
-        scene.redrawShape(swiftris.fallingShape!){
-            swiftris.letShapeFall()
-        }
-        
-    }
-    
-    func gameShapeDidLand(swiftris: Swiftris) {
-        scene.stopTicking()
-        nextShape()
-    }
-    
     // #17
-    func gameShapeDidMove(swiftris: Swiftris) {
+    func gameShapeDidMove(swiftris: Swiftris)
+    {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
 }

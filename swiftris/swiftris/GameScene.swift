@@ -74,6 +74,9 @@ class GameScene: SKScene
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
         background.anchorPoint = CGPoint(x: 0, y: 1.0)
+        
+        //lets make the background the same size as the scene so that when we execute on different size phones my OCD is not affected
+        background.size = (scene?.size)!
         addChild(background)
         
         addChild(gameLayer)
@@ -87,7 +90,14 @@ class GameScene: SKScene
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
+        //set up looping playback for the most annoying song in the world
+        runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
+    }
+    
+    //play any sound file on demand
+    func playSound(sound:String) {
+        runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
     
     //called whenever a scene is presented in a view
@@ -193,5 +203,69 @@ class GameScene: SKScene
         }
     }
 
+    // MARK: ANIMATIONS
+    // take tuple data for each removed line
+    func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
+        
+        //determine how long to wait before calling completion closure
+        var longestDuration: NSTimeInterval = 0
+        
+        // iterate column by column
+        for (columnIdx, column) in fallenBlocks.enumerate() {
+            
+            //block by block
+            for (blockIdx, block) in column.enumerate() {
+                let newPosition = pointForColumn(block.column, row: block.row)
+                let sprite = block.sprite!
+                
+                // blocks fall one after the other than all at once
+                let delay = (NSTimeInterval(columnIdx) * 0.05) + (NSTimeInterval(blockIdx) * 0.05)
+                let duration = NSTimeInterval(((sprite.position.y - newPosition.y) / BlockSize) * 0.1)
+                let moveAction = SKAction.moveTo(newPosition, duration: duration)
+                moveAction.timingMode = .EaseOut
+                sprite.runAction(
+                    SKAction.sequence([
+                        SKAction.waitForDuration(delay),
+                        moveAction]))
+                longestDuration = max(longestDuration, duration + delay)
+            }
+        }
+        
+        for rowToRemove in linesToRemove {
+            for block in rowToRemove {
+                
+                // remove lines and shoot blocks off the screen
+                // generate random to introduce natural variance
+                let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
+                let goLeft = arc4random_uniform(100) % 2 == 0
+                
+                var point = pointForColumn(block.column, row: block.row)
+                point = CGPointMake(point.x + (goLeft ? -randomRadius : randomRadius), point.y)
+                
+                let randomDuration = NSTimeInterval(arc4random_uniform(2)) + 0.5
+                
+                // choose beginning and starting angles
+                var startAngle = CGFloat(M_PI)
+                var endAngle = startAngle * 2
+                if goLeft {
+                    endAngle = startAngle
+                    startAngle = 0
+                }
+                let archPath = UIBezierPath(arcCenter: point, radius: randomRadius, startAngle: startAngle, endAngle: endAngle, clockwise: goLeft)
+                let archAction = SKAction.followPath(archPath.CGPath, asOffset: false, orientToPath: true, duration: randomDuration)
+                archAction.timingMode = .EaseIn
+                let sprite = block.sprite!
+                
+                // place the block sprite above the others such that they animate above the other blocks and begin the sequence of actions which concludes with removing the sprite from the scene
+                sprite.zPosition = 100
+                sprite.runAction(
+                    SKAction.sequence(
+                        [SKAction.group([archAction, SKAction.fadeOutWithDuration(NSTimeInterval(randomDuration))]),
+                            SKAction.removeFromParent()]))
+            }
+        }
+        // run completion action after duration of time take to drop last block to its new resting place
+        runAction(SKAction.waitForDuration(longestDuration), completion:completion)
+    }
     
 }
