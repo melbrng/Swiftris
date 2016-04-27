@@ -96,6 +96,7 @@ class GameScene: SKScene
         
     }
    
+    //lets use update to determine if a time interval has passed
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
