@@ -95,9 +95,11 @@ enum Orientation: Int, CustomStringConvertible
         // iterate through our entire blocks array
         var bottomBlocks:Array<Block>
         {
-            guard let bottomBlocks = bottomBlocksForOrientations[orientation] else {
+            guard let bottomBlocks = bottomBlocksForOrientations[orientation] else
+            {
                 return []
             }
+            
             return bottomBlocks
         }
         
@@ -112,11 +114,13 @@ enum Orientation: Int, CustomStringConvertible
         }
         
         // CustomStringConvertible
-        var description:String {
+        var description:String
+        {
             return "\(color) block facing \(orientation): \(blocks[FirstBlockIdx]), \(blocks[SecondBlockIdx]), \(blocks[ThirdBlockIdx]), \(blocks[FourthBlockIdx])"
         }
         
-        init(column:Int, row:Int, color: BlockColor, orientation:Orientation) {
+        init(column:Int, row:Int, color: BlockColor, orientation:Orientation)
+        {
             self.color = color
             self.column = column
             self.row = row
@@ -144,64 +148,79 @@ enum Orientation: Int, CustomStringConvertible
             }
         }
         
-        final func rotateBlocks(orientation: Orientation) {
-            guard let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] else {
+        final func rotateBlocks(orientation: Orientation)
+        {
+            guard let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] else
+            {
                 return
             }
+            
             // #1
-            for (idx, diff) in blockRowColumnTranslation.enumerate() {
+            for (idx, diff) in blockRowColumnTranslation.enumerate()
+            {
                 blocks[idx].column = column + diff.columnDiff
                 blocks[idx].row = row + diff.rowDiff
             }
         }
         
-        final func rotateClockwise() {
+        final func rotateClockwise()
+        {
             let newOrientation = Orientation.rotate(orientation, clockwise: true)
             rotateBlocks(newOrientation)
             orientation = newOrientation
         }
         
-        final func rotateCounterClockwise() {
+        final func rotateCounterClockwise()
+        {
             let newOrientation = Orientation.rotate(orientation, clockwise: false)
             rotateBlocks(newOrientation)
             orientation = newOrientation
         }
         
-        final func lowerShapeByOneRow() {
+        final func lowerShapeByOneRow()
+        {
             shiftBy(0, rows:1)
         }
         
-        final func raiseShapeByOneRow() {
+        final func raiseShapeByOneRow()
+        {
             shiftBy(0, rows:-1)
         }
         
-        final func shiftRightByOneColumn() {
+        final func shiftRightByOneColumn()
+        {
             shiftBy(1, rows:0)
         }
         
-        final func shiftLeftByOneColumn() {
+        final func shiftLeftByOneColumn()
+        {
             shiftBy(-1, rows:0)
         }
         
         //
-        final func shiftBy(columns: Int, rows: Int) {
+        final func shiftBy(columns: Int, rows: Int)
+        {
             self.column += columns
             self.row += rows
-            for block in blocks {
+            for block in blocks
+            {
                 block.column += columns
                 block.row += rows
             }
         }
         
         //
-        final func moveTo(column: Int, row:Int) {
+        final func moveTo(column: Int, row:Int)
+        {
             self.column = column
             self.row = row
             rotateBlocks(orientation)
         }
         
-        final class func random(startingColumn:Int, startingRow:Int) -> Shape {
-            switch Int(arc4random_uniform(NumShapeTypes)) {
+        final class func random(startingColumn:Int, startingRow:Int) -> Shape
+        {
+            switch Int(arc4random_uniform(NumShapeTypes))
+            {
             // #4
             case 0:
                 return SquareShape(column:startingColumn, row:startingRow)

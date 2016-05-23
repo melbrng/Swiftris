@@ -208,17 +208,23 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.stopTicking()
         self.view.userInteractionEnabled = false
         
-        // #10
+        // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
-        if removedLines.linesRemoved.count > 0 {
+        
+        // if lines were removed update score label to newest score and animate blocks with explosive animation
+        if removedLines.linesRemoved.count > 0
+        {
             self.scoreLabel.text = "\(swiftris.score)"
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks)
             {
-                // #11
+                // detect any new lines
                 self.gameShapeDidLand(swiftris)
             }
             scene.playSound("Sounds/bomb.mp3")
-        } else {
+        }
+            //no new lines -- bring in next shape
+        else
+        {
             nextShape()
         }
     }
