@@ -16,7 +16,7 @@ let PreviewColumn = 12
 let PreviewRow = 1
 
 let PointsPerLine = 10
-let LevelThreshold = 1000
+let LevelThreshold = 500
 
 protocol SwiftrisDelegate
 {
@@ -108,7 +108,7 @@ class Swiftris
         return false
     }
 
-    //dds the falling shape to the collection of blocks maintained by Swiftris
+    //adds the falling shape to the collection of blocks maintained by Swiftris
     func settleShape()
     {
         guard let shape = fallingShape else
@@ -150,14 +150,17 @@ class Swiftris
         delegate?.gameDidEnd(self)
     }
 
+    // linesRemoved each row of blocks the user has filled in
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>)
     {
         var removedLines = Array<Array<Block>>()
         for var row = NumRows - 1; row > 0; row -= 1
         {
             var rowOfBlocks = Array<Block>()
-            // #11
-            for column in 0..<NumColumns {
+            
+            // add every block in a row to rowOfBlocks
+            for column in 0..<NumColumns
+            {
                 guard let block = blockArray[column, row] else
                 {
                     continue
@@ -165,6 +168,7 @@ class Swiftris
                 rowOfBlocks.append(block)
             }
             
+            // if ends up with a full set, counted as removed line and adds to return variable
             if rowOfBlocks.count == NumColumns
             {
                 removedLines.append(rowOfBlocks)
@@ -175,28 +179,31 @@ class Swiftris
             }
         }
         
-        // #12
+        // did we recover any lines? if not return empty arrays
         if removedLines.count == 0
         {
             return ([], [])
         }
         
-        // #13
+        // add points to player's score based on number of lines created and level
         let pointsEarned = removedLines.count * PointsPerLine * level
         score += pointsEarned
         
+        // if score exceeds their level , level up and inform the delegate
         if score >= level * LevelThreshold
         {
             level += 1
             delegate?.gameDidLevelUp(self)
         }
         
+        // array of arrays
         var fallenBlocks = Array<Array<Block>>()
         for column in 0..<NumColumns
         {
             var fallenBlocksArray = Array<Block>()
             
-            // #14
+            // count upwards from lower left and above bottom most removed line, count upwards to top of game board 
+            // take each remaining block we find on game board and lower it as far as possible
             for var row = removedLines[0][0].row - 1; row > 0; row -= 1
             {
                 guard let block = blockArray[column, row] else
@@ -321,6 +328,9 @@ class Swiftris
         delegate?.gameShapeDidMove(self)
     }
     
+    // allow ui to remove blocks
+    // loops through and creates rows of blocks in order for the game scene to animate them off the game board. 
+    // it nullifies each location in the block array to empty it entirely, preparing it for a new game.
     func removeAllBlocks() -> Array<Array<Block>>
     {
         var allBlocks = Array<Array<Block>>()

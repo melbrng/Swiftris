@@ -220,7 +220,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
                 // detect any new lines
                 self.gameShapeDidLand(swiftris)
             }
-            scene.playSound("Sounds/bomb.mp3")
+            scene.playSound("bomb.mp3")
         }
             //no new lines -- bring in next shape
         else
