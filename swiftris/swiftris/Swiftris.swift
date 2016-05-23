@@ -331,6 +331,7 @@ class Swiftris
     // allow ui to remove blocks
     // loops through and creates rows of blocks in order for the game scene to animate them off the game board. 
     // it nullifies each location in the block array to empty it entirely, preparing it for a new game.
+    //
     func removeAllBlocks() -> Array<Array<Block>>
     {
         var allBlocks = Array<Array<Block>>()
