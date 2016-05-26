@@ -147,6 +147,7 @@ class Swiftris
     {
         score = 0
         level = 1
+       // scene.gameCounter = 0
         delegate?.gameDidEnd(self)
     }
 

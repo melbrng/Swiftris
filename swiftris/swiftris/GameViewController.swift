@@ -23,8 +23,11 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
 
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    
     
     override func viewDidLoad()
+    
     {
         super.viewDidLoad()
         
@@ -48,7 +51,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         // Present the scene.
         skView.presentScene(scene)
-
+        
 
     }
 
@@ -229,9 +232,17 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         }
     }
     
-    // #17
+    //
     func gameShapeDidMove(swiftris: Swiftris)
     {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
+    
+    func updateTimer()
+    {
+        
+        timerLabel.text = String(scene.gameCounter)
+    
+    }
+
 }

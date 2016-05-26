@@ -30,6 +30,7 @@ let TickLengthLevelOne = NSTimeInterval(600)
 
 let BlockSize:CGFloat = 20.0
 
+
 class GameScene: SKScene
     
 {
@@ -42,12 +43,16 @@ class GameScene: SKScene
     let shapeLayer = SKNode()
     let LayerPosition = CGPoint(x: 6,y: -6)
     
+    //create a timer for game play
+    var gameTimer = NSTimer()
+    let startDate = NSDate()
+    var gameCounter = 0
     
     //closure ( a block of code that performs a function )
     //a closure that takes no parameters and returns nothing...and its optional
     var tick:(() -> ())?
     
-    //GameScene's current tick length
+    //GameScene's current frame tick length
     var tickLengthMillis = TickLengthLevelOne
     
     //last time we experienced a tick
@@ -90,13 +95,26 @@ class GameScene: SKScene
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
+        //set up timer adding it to the runloop automatically
+        gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.updateTimer), userInfo: nil, repeats: true)
+        
         //set up looping playback for the most annoying song in the world
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
     }
     
+    //timer in seconds to determine how long game is running
+    func updateTimer()->Int
+    {
+        
+        gameCounter+=1
+        return gameCounter
+        
+    }
+    
     //play any sound file on demand
-    func playSound(sound:String) {
+    func playSound(sound:String)
+    {
         runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
     
@@ -109,10 +127,12 @@ class GameScene: SKScene
     //lets use update to determine if a time interval has passed
     override func update(currentTime: CFTimeInterval)
     {
+        
         /* Called before each frame is rendered */
         //guard statement checks the conditions which follow it
         //if the condition fails, guard executes the else block
         //if lastTick is missing the games has been paused and not reporting ticks so return
+        
         guard let lastTick = lastTick else
         {
             return
@@ -123,6 +143,7 @@ class GameScene: SKScene
         //multiply by -1000 to calculate positive millisecond value
         //dot syntax invokes functions on objects
         let timePassed = lastTick.timeIntervalSinceNow * -1000.0
+        
         if timePassed > tickLengthMillis
         {
             self.lastTick = NSDate()
@@ -136,68 +157,80 @@ class GameScene: SKScene
     func startTicking()
     {
         lastTick = NSDate()
+        print((lastTick?.description)! + " startTicking")
     }
     
     func stopTicking()
     {
         lastTick = nil
+        print(" stopTicking")
     }
     
-    func pointForColumn(column: Int, row: Int) -> CGPoint {
+    func pointForColumn(column: Int, row: Int) -> CGPoint
+    {
         let x = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
         let y = LayerPosition.y - ((CGFloat(row) * BlockSize) + (BlockSize / 2))
         return CGPointMake(x, y)
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
-        for block in shape.blocks {
-            // #10
+        for block in shape.blocks
+        {
             var texture = textureCache[block.spriteName]
-            if texture == nil {
+            if texture == nil
+            {
                 texture = SKTexture(imageNamed: block.spriteName)
                 textureCache[block.spriteName] = texture
             }
+            
             let sprite = SKSpriteNode(texture: texture)
-            // #11
             sprite.position = pointForColumn(block.column, row:block.row - 2)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
             
             // Animation
             sprite.alpha = 0
-            // #12
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
             moveAction.timingMode = .EaseOut
+            
             let fadeInAction = SKAction.fadeAlphaTo(0.7, duration: 0.4)
             fadeInAction.timingMode = .EaseOut
+            
             sprite.runAction(SKAction.group([moveAction, fadeInAction]))
         }
         runAction(SKAction.waitForDuration(0.4), completion: completion)
     }
     
-    func movePreviewShape(shape:Shape, completion:() -> ()) {
-        for block in shape.blocks {
+    func movePreviewShape(shape:Shape, completion:() -> ())
+    {
+        for block in shape.blocks
+        {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.2)
             moveToAction.timingMode = .EaseOut
             sprite.runAction(
                 
-                //research error why nil vs {} would fail
-                SKAction.group([moveToAction, SKAction.fadeAlphaTo(1.0, duration: 0.2)]), completion:{})
+            //research error why nil vs {} would fail
+            SKAction.group([moveToAction, SKAction.fadeAlphaTo(1.0, duration: 0.2)]), completion:{})
         }
         runAction(SKAction.waitForDuration(0.2), completion: completion)
     }
     
-    func redrawShape(shape:Shape, completion:() -> ()) {
-        for block in shape.blocks {
+    func redrawShape(shape:Shape, completion:() -> ())
+    {
+        for block in shape.blocks
+        {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
-            if block == shape.blocks.last {
+            if block == shape.blocks.last
+            {
                 sprite.runAction(moveToAction, completion: completion)
-            } else {
+            }
+            else
+            {
                 sprite.runAction(moveToAction)
             }
         }
@@ -264,6 +297,7 @@ class GameScene: SKScene
                             SKAction.removeFromParent()]))
             }
         }
+        
         // run completion action after duration of time take to drop last block to its new resting place
         runAction(SKAction.waitForDuration(longestDuration), completion:completion)
     }
