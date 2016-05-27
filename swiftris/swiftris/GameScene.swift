@@ -44,9 +44,9 @@ class GameScene: SKScene
     let LayerPosition = CGPoint(x: 6,y: -6)
     
     //create a timer for game play
-    var gameTimer = NSTimer()
-    let startDate = NSDate()
-    var gameCounter = 0
+//    var gameTimer = NSTimer()
+//    let startDate = NSDate()
+//    var gameCounter = 0
     
     //closure ( a block of code that performs a function )
     //a closure that takes no parameters and returns nothing...and its optional
@@ -96,21 +96,21 @@ class GameScene: SKScene
         gameLayer.addChild(shapeLayer)
         
         //set up timer adding it to the runloop automatically
-        gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.updateTimer), userInfo: nil, repeats: true)
+        //gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.updateTimer), userInfo: nil, repeats: true)
         
         //set up looping playback for the most annoying song in the world
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
     }
     
-    func updateTimer()->Int
-    {
-        
-        gameCounter+=1
-        //print("counter = " + String(gameCounter))
-        return gameCounter
-        
-    }
+//    func updateTimer()->Int
+//    {
+//        
+//        gameCounter+=1
+//        //print("counter = " + String(gameCounter))
+//        return gameCounter
+//        
+//    }
     
     //play any sound file on demand
     func playSound(sound:String)
