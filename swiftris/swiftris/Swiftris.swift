@@ -37,6 +37,9 @@ protocol SwiftrisDelegate
     
     // Invoked when the game has reached a new level
     func gameDidLevelUp(swiftris: Swiftris)
+    
+    //Invoked when the game has timed out
+    func gameTimedOut(swiftris: Swiftris)
 }
 
 class Swiftris
@@ -48,6 +51,7 @@ class Swiftris
     
     var score = 0
     var level = 1
+    var timer = 0
     
     init()
     {
@@ -233,7 +237,8 @@ class Swiftris
     }
     
     //Dropping a shape is the act of sending it plummeting towards the bottom of the game board. The user will elect to do this when their patience for the slow-moving Tetromino wears thin. #4 provides a convenient function to achieve this. It will continue dropping the shape by a single row until it detects an illegal placement state, at which point it will raise it and then notify the delegate that a drop has occurred.
-    func dropShape() {
+    func dropShape()
+    {
         guard let shape = fallingShape else {
             return
         }
@@ -332,7 +337,7 @@ class Swiftris
     // allow ui to remove blocks
     // loops through and creates rows of blocks in order for the game scene to animate them off the game board. 
     // it nullifies each location in the block array to empty it entirely, preparing it for a new game.
-    //
+    
     func removeAllBlocks() -> Array<Array<Block>>
     {
         var allBlocks = Array<Array<Block>>()

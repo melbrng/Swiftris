@@ -25,6 +25,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
+    var gameTimer = NSTimer()
+    let startDate = NSDate()
+    var gameCounter = 0
     
     override func viewDidLoad()
     
@@ -51,7 +54,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         // Present the scene.
         skView.presentScene(scene)
-        
 
     }
 
@@ -143,7 +145,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //reset the score and level labels and the speed at which the ticks occur
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
+        timerLabel.text = "\(swiftris.timer)"
         scene.tickLengthMillis = TickLengthLevelOne
+        
+        startTimer()
         
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil
@@ -173,6 +178,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
             swiftris.beginGame()
         }
     }
+    
+    
     
     //as players level up will decrease tick level
     func gameDidLevelUp(swiftris: Swiftris)
@@ -232,16 +239,55 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         }
     }
     
-    //
     func gameShapeDidMove(swiftris: Swiftris)
     {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
     
+    func gameTimedOut(swiftris: Swiftris)
+    {
+        view.userInteractionEnabled = false
+        scene.stopTicking()
+        resetTimer()
+        
+        //game ends play game over sound
+        scene.playSound("gameover.mp3")
+        
+        //then destroy the remaining blocks on the screen
+        scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
+        {
+            swiftris.beginGame()
+        }
+    }
+    
+    func startTimer()
+    {
+        //set up timer adding it to the runloop automatically
+        self.gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    func resetTimer()
+    {
+        self.gameTimer.invalidate()
+        gameCounter = 0
+        
+        //set up timer adding it to the runloop automatically
+        self.gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.updateTimer), userInfo: nil, repeats: true)
+   
+    }
+    
     func updateTimer()
     {
+        print(String(gameCounter))
         
-        timerLabel.text = String(scene.gameCounter)
+        gameCounter+=1
+        if gameCounter > 10
+        {
+            gameTimedOut(swiftris)
+        }
+        
+        timerLabel.text = String(gameCounter)
+        
     
     }
 

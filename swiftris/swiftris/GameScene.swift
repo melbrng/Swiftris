@@ -103,11 +103,11 @@ class GameScene: SKScene
         
     }
     
-    //timer in seconds to determine how long game is running
     func updateTimer()->Int
     {
         
         gameCounter+=1
+        //print("counter = " + String(gameCounter))
         return gameCounter
         
     }
@@ -128,10 +128,15 @@ class GameScene: SKScene
     override func update(currentTime: CFTimeInterval)
     {
         
+        //print("update")
+       
+        
         /* Called before each frame is rendered */
         //guard statement checks the conditions which follow it
         //if the condition fails, guard executes the else block
         //if lastTick is missing the games has been paused and not reporting ticks so return
+        
+        //print(lastTick?.description)
         
         guard let lastTick = lastTick else
         {
@@ -143,6 +148,8 @@ class GameScene: SKScene
         //multiply by -1000 to calculate positive millisecond value
         //dot syntax invokes functions on objects
         let timePassed = lastTick.timeIntervalSinceNow * -1000.0
+        
+        //print(timePassed)
         
         if timePassed > tickLengthMillis
         {
@@ -157,13 +164,13 @@ class GameScene: SKScene
     func startTicking()
     {
         lastTick = NSDate()
-        print((lastTick?.description)! + " startTicking")
+        //print((lastTick?.description)! + " startTicking")
     }
     
     func stopTicking()
     {
         lastTick = nil
-        print(" stopTicking")
+        //print(" stopTicking")
     }
     
     func pointForColumn(column: Int, row: Int) -> CGPoint
@@ -176,6 +183,7 @@ class GameScene: SKScene
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
         for block in shape.blocks
         {
+            // #10
             var texture = textureCache[block.spriteName]
             if texture == nil
             {
@@ -184,12 +192,14 @@ class GameScene: SKScene
             }
             
             let sprite = SKSpriteNode(texture: texture)
+            // #11
             sprite.position = pointForColumn(block.column, row:block.row - 2)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
             
             // Animation
             sprite.alpha = 0
+            // #12
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
             moveAction.timingMode = .EaseOut
             
@@ -211,8 +221,8 @@ class GameScene: SKScene
             moveToAction.timingMode = .EaseOut
             sprite.runAction(
                 
-            //research error why nil vs {} would fail
-            SKAction.group([moveToAction, SKAction.fadeAlphaTo(1.0, duration: 0.2)]), completion:{})
+                //research error why nil vs {} would fail
+                SKAction.group([moveToAction, SKAction.fadeAlphaTo(1.0, duration: 0.2)]), completion:{})
         }
         runAction(SKAction.waitForDuration(0.2), completion: completion)
     }
@@ -297,7 +307,6 @@ class GameScene: SKScene
                             SKAction.removeFromParent()]))
             }
         }
-        
         // run completion action after duration of time take to drop last block to its new resting place
         runAction(SKAction.waitForDuration(longestDuration), completion:completion)
     }
