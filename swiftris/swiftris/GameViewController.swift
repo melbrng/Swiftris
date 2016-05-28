@@ -27,7 +27,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     //lets make this an optional since I want to set it to null on reset
     var gameTimer:NSTimer?
-    let startDate = NSDate()
+    var startDate:NSDate? = nil
+    var timerDate:NSDate? = nil
     var gameCounter = 0
     
     override func viewDidLoad()
@@ -35,6 +36,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         super.viewDidLoad()
         
+        startDate = NSDate()
         
         // Configure the view.
         //The as! operator is a forced downcast. The view object is of type SKView, but before downcasting, our code treated it like a basic UIView. Without downcasting, we are unable to access SKView methods and properties, such as presentScene(SKScene).
@@ -245,6 +247,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.redrawShape(swiftris.fallingShape!) {}
     }
     
+     // MARK: GameTimer
     func gameTimedOut(swiftris: Swiftris)
     {
         view.userInteractionEnabled = false
@@ -277,14 +280,17 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func updateTimer()
     {
+
+        timerDate = NSDate()
+            
+        let timerTimeInterval:NSTimeInterval? = timerDate!.timeIntervalSinceDate(startDate!)
+
+//        if gameCounter > 10
+//        {
+//            gameTimedOut(swiftris)
+//        }
         
-        gameCounter+=1
-        if gameCounter > 10
-        {
-            gameTimedOut(swiftris)
-        }
-        
-        timerLabel.text = String(gameCounter)
+        timerLabel.text = String(Int(timerTimeInterval!))
         
     
     }
