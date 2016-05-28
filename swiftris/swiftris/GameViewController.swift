@@ -25,7 +25,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
-    var gameTimer = NSTimer()
+    //lets make this an optional since I want to set it to null on reset
+    var gameTimer:NSTimer?
     let startDate = NSDate()
     var gameCounter = 0
     
@@ -77,9 +78,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         let currentPoint = sender.translationInView(self.view)
         if let originalPoint = panPointReference {
-            // #3
+            
             if abs(currentPoint.x - originalPoint.x) > (BlockSize * 0.9) {
-                // #4
+                
                 if sender.velocityInView(self.view).x > CGFloat(0) {
                     swiftris.moveShapeRight()
                     panPointReference = currentPoint
@@ -268,17 +269,14 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func resetTimer()
     {
-        self.gameTimer.invalidate()
+        gameTimer!.invalidate()
+        gameTimer = nil
         gameCounter = 0
-        
-        //set up timer adding it to the runloop automatically
-        self.gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.updateTimer), userInfo: nil, repeats: true)
    
     }
     
     func updateTimer()
     {
-        print(String(gameCounter))
         
         gameCounter+=1
         if gameCounter > 10

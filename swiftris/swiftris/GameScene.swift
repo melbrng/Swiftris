@@ -43,10 +43,6 @@ class GameScene: SKScene
     let shapeLayer = SKNode()
     let LayerPosition = CGPoint(x: 6,y: -6)
     
-    //create a timer for game play
-//    var gameTimer = NSTimer()
-//    let startDate = NSDate()
-//    var gameCounter = 0
     
     //closure ( a block of code that performs a function )
     //a closure that takes no parameters and returns nothing...and its optional
@@ -95,22 +91,11 @@ class GameScene: SKScene
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
-        //set up timer adding it to the runloop automatically
-        //gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.updateTimer), userInfo: nil, repeats: true)
-        
         //set up looping playback for the most annoying song in the world
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
     }
     
-//    func updateTimer()->Int
-//    {
-//        
-//        gameCounter+=1
-//        //print("counter = " + String(gameCounter))
-//        return gameCounter
-//        
-//    }
     
     //play any sound file on demand
     func playSound(sound:String)
@@ -127,16 +112,12 @@ class GameScene: SKScene
     //lets use update to determine if a time interval has passed
     override func update(currentTime: CFTimeInterval)
     {
-        
-        //print("update")
-       
+
         
         /* Called before each frame is rendered */
         //guard statement checks the conditions which follow it
         //if the condition fails, guard executes the else block
         //if lastTick is missing the games has been paused and not reporting ticks so return
-        
-        //print(lastTick?.description)
         
         guard let lastTick = lastTick else
         {
@@ -148,8 +129,6 @@ class GameScene: SKScene
         //multiply by -1000 to calculate positive millisecond value
         //dot syntax invokes functions on objects
         let timePassed = lastTick.timeIntervalSinceNow * -1000.0
-        
-        //print(timePassed)
         
         if timePassed > tickLengthMillis
         {
@@ -164,13 +143,13 @@ class GameScene: SKScene
     func startTicking()
     {
         lastTick = NSDate()
-        //print((lastTick?.description)! + " startTicking")
+
     }
     
     func stopTicking()
     {
         lastTick = nil
-        //print(" stopTicking")
+
     }
     
     func pointForColumn(column: Int, row: Int) -> CGPoint
@@ -183,7 +162,7 @@ class GameScene: SKScene
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
         for block in shape.blocks
         {
-            // #10
+            
             var texture = textureCache[block.spriteName]
             if texture == nil
             {
@@ -192,14 +171,14 @@ class GameScene: SKScene
             }
             
             let sprite = SKSpriteNode(texture: texture)
-            // #11
+            
             sprite.position = pointForColumn(block.column, row:block.row - 2)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
             
             // Animation
             sprite.alpha = 0
-            // #12
+            
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
             moveAction.timingMode = .EaseOut
             
