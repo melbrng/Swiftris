@@ -30,11 +30,15 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     var startDate:NSDate? = nil
     var timerDate:NSDate? = nil
     var gameCounter = 0
+    var gamePlay = 0
+
     
     override func viewDidLoad()
     
     {
         super.viewDidLoad()
+        
+        print("gamePlay = "+String(gamePlay))
         
         startDate = NSDate()
         
@@ -289,6 +293,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
 //        {
 //            gameTimedOut(swiftris)
 //        }
+        
         
         timerLabel.text = String(Int(timerTimeInterval!))
         

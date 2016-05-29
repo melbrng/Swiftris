@@ -38,6 +38,7 @@
 		439E71BF1C77D17A0052530A /* gameboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71B91C77D17A0052530A /* gameboard@2x.png */; };
 		439E71C01C77D17A0052530A /* whitebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71BA1C77D17A0052530A /* whitebg.png */; };
 		439E71C11C77D17A0052530A /* whitebg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E71BB1C77D17A0052530A /* whitebg@2x.png */; };
+		43E8645E1CFB6A3200579423 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E8645D1CFB6A3200579423 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		439E71B91C77D17A0052530A /* gameboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameboard@2x.png"; sourceTree = "<group>"; };
 		439E71BA1C77D17A0052530A /* whitebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebg.png; sourceTree = "<group>"; };
 		439E71BB1C77D17A0052530A /* whitebg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitebg@2x.png"; sourceTree = "<group>"; };
+		43E8645D1CFB6A3200579423 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				439E717A1C77C9F00052530A /* GameScene.swift */,
 				439E71761C77C9F00052530A /* AppDelegate.swift */,
 				439E717C1C77C9F00052530A /* GameViewController.swift */,
+				43E8645D1CFB6A3200579423 /* MainViewController.swift */,
 				438F64671CB45DCC00DFCB2A /* Array2D.swift */,
 				438F64691CB4745800DFCB2A /* Block.swift */,
 				438F647B1CB47FF100DFCB2A /* Swiftris.swift */,
@@ -374,6 +377,7 @@
 				438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */,
 				438F64721CB47E8C00DFCB2A /* LineShape.swift in Sources */,
 				438F64781CB47ED400DFCB2A /* SShape.swift in Sources */,
+				43E8645E1CFB6A3200579423 /* MainViewController.swift in Sources */,
 				438F64701CB47E7500DFCB2A /* TShape.swift in Sources */,
 				438F646A1CB4745800DFCB2A /* Block.swift in Sources */,
 				439E717D1C77C9F00052530A /* GameViewController.swift in Sources */,
