@@ -31,7 +31,6 @@ class MainViewController: UIViewController
     {
         if(segue.identifier == "showGameView")
         {
-            print("index : " + String(gamePlaySegmentControl.selectedSegmentIndex))
 
             if let gameViewController:GameViewController = segue.destinationViewController as? GameViewController
             {

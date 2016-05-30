@@ -27,11 +27,17 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     //lets make this an optional since I want to set it to null on reset
     var gameTimer:NSTimer?
-    var startDate:NSDate? = nil
-    var timerDate:NSDate? = nil
-    var gameCounter = 0
+    //var startDate:NSDate? = nil
+    //var timerDate:NSDate? = nil
+    //var gameCounter = 0
     var gamePlay = 0
-
+    var gamePlayTime = 0
+    var startTime = NSTimeInterval()
+    
+    enum gamePlayEnum
+    {
+        case Classic,Timed
+    }
     
     override func viewDidLoad()
     
@@ -39,14 +45,15 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         super.viewDidLoad()
         
         print("gamePlay = "+String(gamePlay))
+        setTheGamePlayTime()
         
-        startDate = NSDate()
+        //startDate = NSDate()
+        startTime = NSDate.timeIntervalSinceReferenceDate()
         
         // Configure the view.
         //The as! operator is a forced downcast. The view object is of type SKView, but before downcasting, our code treated it like a basic UIView. Without downcasting, we are unable to access SKView methods and properties, such as presentScene(SKScene).
         
         //because SKView is a subclass of View , downcast in order to be able to access properties
-        //??? Why downcast ??? Why not declare SKView instead ???
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         
@@ -278,24 +285,55 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         gameTimer!.invalidate()
         gameTimer = nil
-        gameCounter = 0
    
+    }
+    
+    func setTheGamePlayTime() -> Int
+    {
+        if(gamePlay == 1)
+        {
+            gamePlayTime = 120
+        }
+        
+        print(String(gamePlayTime))
+        
+        return gamePlayTime
     }
     
     func updateTimer()
     {
-
-        timerDate = NSDate()
-            
-        let timerTimeInterval:NSTimeInterval? = timerDate!.timeIntervalSinceDate(startDate!)
-
-//        if gameCounter > 10
+        
+    
+//        if Int(timerTimeInterval!) > gamePlayTime
 //        {
 //            gameTimedOut(swiftris)
 //        }
         
         
-        timerLabel.text = String(Int(timerTimeInterval!))
+        
+     
+        
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        
+        //Find the difference between current time and start time.
+        var elapsedTime: NSTimeInterval = currentTime - startTime
+        
+        //calculate the minutes in elapsed time.
+        let minutes = UInt8(elapsedTime / 60.0)
+        elapsedTime -= (NSTimeInterval(minutes) * 60)
+        
+        //calculate the seconds in elapsed time.
+        let seconds = UInt8(elapsedTime)
+        elapsedTime -= NSTimeInterval(seconds)
+        
+        //add the leading zero for minutes, seconds and millseconds and store them as string constants
+        
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        
+        //concatenate minuets, seconds as assign it to the timerLabel
+        timerLabel.text = "\(strMinutes):\(strSeconds)"
+    
         
     
     }
