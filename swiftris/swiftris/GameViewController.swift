@@ -24,19 +24,18 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var gamePlayLabel: UILabel!
     
     //lets make this an optional since I want to set it to null on reset
     var gameTimer:NSTimer?
-    //var startDate:NSDate? = nil
-    //var timerDate:NSDate? = nil
-    //var gameCounter = 0
     var gamePlay = 0
     var gamePlayTime = 0
     var startTime = NSTimeInterval()
     
-    enum gamePlayEnum
+    enum gamePlayEnum:Int
     {
-        case Classic,Timed
+        case Classic = 0
+        case Timed = 1
     }
     
     override func viewDidLoad()
@@ -44,10 +43,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         super.viewDidLoad()
         
-        print("gamePlay = "+String(gamePlay))
-        setTheGamePlayTime()
+        //set the limit on the gamePlay time if the user chooses classic or timed play
+        gamePlayTime = setTheGamePlayTime()
         
-        //startDate = NSDate()
         startTime = NSDate.timeIntervalSinceReferenceDate()
         
         // Configure the view.
@@ -159,7 +157,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //reset the score and level labels and the speed at which the ticks occur
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
-        timerLabel.text = "\(swiftris.timer)"
+        //timerLabel.text = "\(swiftris.timer)"
         scene.tickLengthMillis = TickLengthLevelOne
         
         startTimer()
@@ -185,6 +183,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         //game ends play game over sound
         scene.playSound("gameover.mp3")
+        
+        stopTimer()
         
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
@@ -259,21 +259,21 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     }
     
      // MARK: GameTimer
-    func gameTimedOut(swiftris: Swiftris)
-    {
-        view.userInteractionEnabled = false
-        scene.stopTicking()
-        resetTimer()
-        
-        //game ends play game over sound
-        scene.playSound("gameover.mp3")
-        
-        //then destroy the remaining blocks on the screen
-        scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
-        {
-            swiftris.beginGame()
-        }
-    }
+//    func gameTimedOut(swiftris: Swiftris)
+//    {
+//        view.userInteractionEnabled = false
+//        scene.stopTicking()
+//        stopTimer()
+//        
+//        //game ends play game over sound
+//        scene.playSound("gameover.mp3")
+//        
+//        //then destroy the remaining blocks on the screen
+//        scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
+//        {
+//            swiftris.beginGame()
+//        }
+//    }
     
     func startTimer()
     {
@@ -281,21 +281,27 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         self.gameTimer = NSTimer .scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.updateTimer), userInfo: nil, repeats: true)
     }
     
-    func resetTimer()
+    func stopTimer()
     {
         gameTimer!.invalidate()
         gameTimer = nil
+        
+        startTime = NSDate.timeIntervalSinceReferenceDate()
+        //gamePlayTime = 0
    
     }
     
     func setTheGamePlayTime() -> Int
     {
-        if(gamePlay == 1)
+        if(gamePlay == gamePlayEnum.Timed.rawValue)
         {
-            gamePlayTime = 120
+            gamePlayTime = 20
+            gamePlayLabel.text = "Timed"
         }
-        
-        print(String(gamePlayTime))
+        else
+        {
+            gamePlayLabel.text = "Classic"
+        }
         
         return gamePlayTime
     }
@@ -303,27 +309,22 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func updateTimer()
     {
         
-    
-//        if Int(timerTimeInterval!) > gamePlayTime
-//        {
-//            gameTimedOut(swiftris)
-//        }
-        
-        
-        
-     
         
         let currentTime = NSDate.timeIntervalSinceReferenceDate()
         
         //Find the difference between current time and start time.
         var elapsedTime: NSTimeInterval = currentTime - startTime
         
+        print(startTime)
+        print(currentTime)
+        
+        
         //calculate the minutes in elapsed time.
-        let minutes = UInt8(elapsedTime / 60.0)
+        var minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (NSTimeInterval(minutes) * 60)
         
         //calculate the seconds in elapsed time.
-        let seconds = UInt8(elapsedTime)
+        var seconds = UInt8(elapsedTime)
         elapsedTime -= NSTimeInterval(seconds)
         
         //add the leading zero for minutes, seconds and millseconds and store them as string constants
@@ -333,8 +334,17 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         //concatenate minuets, seconds as assign it to the timerLabel
         timerLabel.text = "\(strMinutes):\(strSeconds)"
-    
         
+        print(String(Int(seconds)))
+        
+        if(Int(seconds) >= gamePlayTime && gamePlay == gamePlayEnum.Timed.rawValue)
+        {
+            minutes = 0
+            seconds = 0
+            //stopTimer()
+            gameDidEnd(swiftris)
+        }
+    
     
     }
 

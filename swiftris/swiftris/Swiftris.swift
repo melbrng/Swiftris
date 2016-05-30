@@ -39,7 +39,7 @@ protocol SwiftrisDelegate
     func gameDidLevelUp(swiftris: Swiftris)
     
     //Invoked when the game has timed out
-    func gameTimedOut(swiftris: Swiftris)
+    //func gameTimedOut(swiftris: Swiftris)
 }
 
 class Swiftris
@@ -51,7 +51,7 @@ class Swiftris
     
     var score = 0
     var level = 1
-    var timer = 0
+    //var timer = 0
     
     init()
     {

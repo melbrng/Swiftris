@@ -141,6 +141,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="gamePlayLabel" destination="FgN-F7-amU" id="3J2-Lq-MlS"/>
                         <outlet property="levelLabel" destination="k4T-BF-mSF" id="RH2-iM-6Ma"/>
                         <outlet property="scoreLabel" destination="yr0-JW-Scg" id="iJM-E3-qYT"/>
                         <outlet property="timerLabel" destination="IM2-SP-yal" id="pUT-Dp-Mo0"/>
