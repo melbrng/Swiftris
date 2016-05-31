@@ -26,6 +26,11 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var gamePlayLabel: UILabel!
     
+    @IBAction func resetButton(sender: AnyObject)
+    {
+        gameDidEnd(swiftris)
+    }
+    
     //lets make this an optional since I want to set it to null on reset
     var gameTimer:NSTimer?
     var gamePlay = 0
