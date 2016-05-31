@@ -183,7 +183,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func gameDidEnd(swiftris: Swiftris)
     {
-        print("gameDidEnd")
         
         view.userInteractionEnabled = false
         scene.stopTicking()
@@ -191,6 +190,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //game ends play game over sound
         scene.playSound("gameover.mp3")
 
+        stopTimer()
         
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
@@ -265,21 +265,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     }
     
      // MARK: GameTimer
-//    func gameTimedOut(swiftris: Swiftris)
-//    {
-//        view.userInteractionEnabled = false
-//        scene.stopTicking()
-//        stopTimer()
-//        
-//        //game ends play game over sound
-//        scene.playSound("gameover.mp3")
-//        
-//        //then destroy the remaining blocks on the screen
-//        scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
-//        {
-//            swiftris.beginGame()
-//        }
-//    }
     
     func startTimer()
     {

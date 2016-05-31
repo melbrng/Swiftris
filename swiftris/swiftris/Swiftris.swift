@@ -38,8 +38,6 @@ protocol SwiftrisDelegate
     // Invoked when the game has reached a new level
     func gameDidLevelUp(swiftris: Swiftris)
     
-    //Invoked when the game has timed out
-    //func gameTimedOut(swiftris: Swiftris)
 }
 
 class Swiftris
@@ -151,7 +149,7 @@ class Swiftris
     {
         score = 0
         level = 1
-       // scene.gameCounter = 0
+        timer = "00:00"
         delegate?.gameDidEnd(self)
     }
 
