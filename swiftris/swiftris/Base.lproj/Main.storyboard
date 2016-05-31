@@ -72,7 +72,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJG-KS-dtF">
-                                <rect key="frame" x="228" y="282" width="84" height="100"/>
+                                <rect key="frame" x="289" y="279" width="84" height="100"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whitebg.png" translatesAutoresizingMaskIntoConstraints="NO" id="TYA-Oh-SBt">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="100"/>
@@ -92,7 +92,7 @@
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CE8-zf-bqr">
-                                <rect key="frame" x="228" y="156" width="84" height="100"/>
+                                <rect key="frame" x="289" y="153" width="84" height="100"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whitebg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uf1-hP-x9m">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="100"/>
@@ -112,7 +112,7 @@
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ok4-Km-Ptr">
-                                <rect key="frame" x="228" y="407" width="84" height="100"/>
+                                <rect key="frame" x="289" y="404" width="84" height="100"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whitebg.png" translatesAutoresizingMaskIntoConstraints="NO" id="tME-s1-i0V">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="100"/>

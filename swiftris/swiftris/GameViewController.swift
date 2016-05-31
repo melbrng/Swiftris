@@ -136,7 +136,12 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         swiftris.letShapeFall()
         swiftris.fallingShape?.lowerShapeByOneRow()
-        scene.redrawShape(swiftris.fallingShape!, completion: {})
+        
+        //crash fix, check for optional value
+        if(swiftris.fallingShape != nil)
+        {
+            scene.redrawShape(swiftris.fallingShape!, completion: {})
+        }
     }
     
     func nextShape() {
@@ -157,7 +162,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //reset the score and level labels and the speed at which the ticks occur
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
-        //timerLabel.text = "\(swiftris.timer)"
+        timerLabel.text = "\(swiftris.timer)"
         scene.tickLengthMillis = TickLengthLevelOne
         
         startTimer()
@@ -178,13 +183,14 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func gameDidEnd(swiftris: Swiftris)
     {
+        print("gameDidEnd")
+        
         view.userInteractionEnabled = false
         scene.stopTicking()
         
         //game ends play game over sound
         scene.playSound("gameover.mp3")
-        
-        stopTimer()
+
         
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
@@ -295,7 +301,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         if(gamePlay == gamePlayEnum.Timed.rawValue)
         {
-            gamePlayTime = 20
+            gamePlayTime = 2
             gamePlayLabel.text = "Timed"
         }
         else
@@ -314,11 +320,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         //Find the difference between current time and start time.
         var elapsedTime: NSTimeInterval = currentTime - startTime
-        
-        print(startTime)
-        print(currentTime)
-        
-        
+
         //calculate the minutes in elapsed time.
         var minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (NSTimeInterval(minutes) * 60)
@@ -335,13 +337,11 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //concatenate minuets, seconds as assign it to the timerLabel
         timerLabel.text = "\(strMinutes):\(strSeconds)"
         
-        print(String(Int(seconds)))
-        
-        if(Int(seconds) >= gamePlayTime && gamePlay == gamePlayEnum.Timed.rawValue)
+        if(Int(minutes) == gamePlayTime && gamePlay == gamePlayEnum.Timed.rawValue)
         {
             minutes = 0
             seconds = 0
-            //stopTimer()
+        
             gameDidEnd(swiftris)
         }
     

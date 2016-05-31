@@ -51,7 +51,7 @@ class Swiftris
     
     var score = 0
     var level = 1
-    //var timer = 0
+    var timer = "00:00"
     
     init()
     {

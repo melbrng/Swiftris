@@ -28,7 +28,7 @@ import SpriteKit
 //every 6/10th of a second our shape should descend by one row
 let TickLengthLevelOne = NSTimeInterval(600)
 
-let BlockSize:CGFloat = 20.0
+let BlockSize:CGFloat = 25.0
 
 
 class GameScene: SKScene
@@ -92,7 +92,7 @@ class GameScene: SKScene
         gameLayer.addChild(shapeLayer)
         
         //set up looping playback for the most annoying song in the world
-        runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
+        //runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
     }
     
