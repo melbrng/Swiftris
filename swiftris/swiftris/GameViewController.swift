@@ -26,10 +26,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var gamePlayLabel: UILabel!
     
-    @IBAction func resetButton(sender: AnyObject)
-    {
-        gameDidEnd(swiftris)
-    }
     
     //lets make this an optional since I want to set it to null on reset
     var gameTimer:NSTimer?
@@ -71,6 +67,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         // Present the scene.
         skView.presentScene(scene)
+
 
     }
 
@@ -118,22 +115,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     // fail other gesture if choose
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool
     {
-        if gestureRecognizer is UISwipeGestureRecognizer
-        {
-            if otherGestureRecognizer is UIPanGestureRecognizer
-            {
-                return true
-            }
-        }
-        else if gestureRecognizer is UIPanGestureRecognizer
-        {
-            if otherGestureRecognizer is UITapGestureRecognizer
-            {
-                return true
-            }
-        }
         
-        return false
+        return ( ( gestureRecognizer is UISwipeGestureRecognizer && otherGestureRecognizer is UIPanGestureRecognizer) ||
+            ( gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UITapGestureRecognizer ) )
     }
     
     
@@ -157,7 +141,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
             scene.addPreviewShapeToScene(newShapes.nextShape!) {}
             scene.movePreviewShape(fallingShape) {
  
-            self.view.userInteractionEnabled = true
             scene.startTicking()
         }
     }
@@ -188,8 +171,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func gameDidEnd(swiftris: Swiftris)
     {
-        
-        view.userInteractionEnabled = false
+
         scene.stopTicking()
         
         //game ends play game over sound
@@ -200,7 +182,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
         {
-            swiftris.beginGame()
+           
         }
     }
     
@@ -241,7 +223,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func gameShapeDidLand(swiftris: Swiftris)
     {
         scene.stopTicking()
-        self.view.userInteractionEnabled = false
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
@@ -279,11 +260,13 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func stopTimer()
     {
-        gameTimer!.invalidate()
-        gameTimer = nil
+        if gameTimer != nil
+        {
+            gameTimer!.invalidate()
+            gameTimer = nil
+        }
         
         startTime = NSDate.timeIntervalSinceReferenceDate()
-        //gamePlayTime = 0
    
     }
     
@@ -302,9 +285,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         return gamePlayTime
     }
     
+    
+    //  based on timer logic in SimpleStopDemo created by Ravi Shankar.
     func updateTimer()
     {
-        
         
         let currentTime = NSDate.timeIntervalSinceReferenceDate()
         
@@ -336,6 +320,14 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         }
     
     
+    }
+    
+    @IBAction func resetButton(sender: AnyObject)
+    {
+
+        scene.stopTicking()
+        
+        stopTimer()
     }
 
 }
