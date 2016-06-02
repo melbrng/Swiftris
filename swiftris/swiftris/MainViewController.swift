@@ -35,6 +35,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
             
             if let gameViewController:GameViewController = segue.destinationViewController as? GameViewController
             {
+                updateGamesPlayedAchievement()
                 gameViewController.gamePlay = gamePlaySegmentControl.selectedSegmentIndex
             }
         }
@@ -102,5 +103,26 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController)
     {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func updateGamesPlayedAchievement()
+    {
+        if GKLocalPlayer.localPlayer().authenticated
+        {
+            let gamesPlayedAchievement = GKAchievement(identifier: "GamesPlayed")
+            gamesPlayedAchievement.showsCompletionBanner = true
+            let achievements = [gamesPlayedAchievement];
+           
+            GKAchievement .reportAchievements(achievements, withCompletionHandler: ({(error) -> Void in
+                if (error != nil) {
+                    // handle error
+                    print("Error: " + error!.localizedDescription);
+                }
+                else
+                {
+                    print("Achievement reported")
+                }
+            }))
+        }
     }
 }
