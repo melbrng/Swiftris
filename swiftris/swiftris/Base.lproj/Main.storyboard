@@ -49,6 +49,13 @@
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="showGameView" id="A9f-Co-8QS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-kf-ZPG">
+                                <rect key="frame" x="163" y="540" width="30" height="30"/>
+                                <state key="normal" title="GC"/>
+                                <connections>
+                                    <action selector="showGameCenter:" destination="0kq-bx-Gxb" eventType="touchUpInside" id="vAB-oK-wDo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
