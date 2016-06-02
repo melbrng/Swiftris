@@ -16,6 +16,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     @IBOutlet weak var gamePlaySegmentControl: UISegmentedControl!
     var gameCenterEnabled:Bool!
     var leaderboardIdentifier:String?
+    var localPlayer:GKLocalPlayer!
     
     override func viewDidLoad()
     {
@@ -41,42 +42,48 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     
     func authenticateLocalPlayer()
     {
-        let localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer = GKLocalPlayer.localPlayer()
         
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil)
                 {
                     self.presentViewController(viewController!, animated: true, completion: nil)
                 }
-                else
+            else
                 {
                     print("(GameCenter) Player authenticated: \(GKLocalPlayer.localPlayer().authenticated)")
-                }
-        }
-        
-        if (localPlayer.authenticated)
-            {
-                self.gameCenterEnabled = true
-                
-                // Get the default leaderboard
-                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
-                    if (error != nil)
-                    {
-                        print(error?.localizedDescription)
-                    }
-                    else
-                    {
-                        self.leaderboardIdentifier = leaderboardIdentifier!
-                        print(self.leaderboardIdentifier)
-                    }
-                });
-                
+                    self.gameCenterEnabled = true
+
             }
         }
+    }
     
     
     @IBAction func showGameCenter(sender: AnyObject)
     {
+        if (localPlayer.authenticated)
+        {
+            self.gameCenterEnabled = true
+            
+            // Get the default leaderboard
+            localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
+                if (error != nil)
+                {
+                    print(error?.localizedDescription)
+                }
+                else
+                {
+                    self.leaderboardIdentifier = leaderboardIdentifier!
+                    print(self.leaderboardIdentifier)
+                }
+            });
+            
+        }
+        else
+        {
+            self.gameCenterEnabled = false
+        }
+
         if gameCenterEnabled == true
         {
             let gcGameCenterViewController = GKGameCenterViewController()
