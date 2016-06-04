@@ -36,7 +36,6 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
             
             if let gameViewController:GameViewController = segue.destinationViewController as? GameViewController
             {
-                //updateGamesPlayedAchievement()
                 reportGamesPlayed()
                 gameViewController.gamePlay = gamePlaySegmentControl.selectedSegmentIndex
             }
