@@ -14,7 +14,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
 {
     
     @IBOutlet weak var gamePlaySegmentControl: UISegmentedControl!
-    var gameCenterEnabled:Bool!
+    var gameCenterEnabled:Bool! = false
     var leaderboardIdentifier:String?
     var localPlayer:GKLocalPlayer!
     
@@ -41,6 +41,12 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         }
     }
     
+    @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController)
+    {
+        print("override")
+        
+    }
+    
     func authenticateLocalPlayer()
     {
         localPlayer = GKLocalPlayer.localPlayer()
@@ -54,36 +60,27 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
                 {
                     print("(GameCenter) Player authenticated: \(GKLocalPlayer.localPlayer().authenticated)")
                     self.gameCenterEnabled = true
+                    
+                    // Get the default leaderboard
+                    self.localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
+                        if (error != nil)
+                        {
+                            print(error?.localizedDescription)
+                        }
+                        else
+                        {
+                            self.leaderboardIdentifier = leaderboardIdentifier!
+                            print(self.leaderboardIdentifier)
+                        }
+                    });
+                }
 
-            }
         }
     }
     
     
     @IBAction func showGameCenter(sender: AnyObject)
     {
-        if (localPlayer.authenticated)
-        {
-            self.gameCenterEnabled = true
-            
-            // Get the default leaderboard
-            localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
-                if (error != nil)
-                {
-                    print(error?.localizedDescription)
-                }
-                else
-                {
-                    self.leaderboardIdentifier = leaderboardIdentifier!
-                    print(self.leaderboardIdentifier)
-                }
-            });
-            
-        }
-        else
-        {
-            self.gameCenterEnabled = false
-        }
 
         if gameCenterEnabled == true
         {
@@ -111,7 +108,8 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         {
             let gamesPlayedAchievement = GKAchievement(identifier: "GamesPlayed")
             gamesPlayedAchievement.showsCompletionBanner = true
-            let achievements = [gamesPlayedAchievement];
+            gamesPlayedAchievement.percentComplete = 100.0
+            let achievements = [gamesPlayedAchievement]
            
             GKAchievement .reportAchievements(achievements, withCompletionHandler: ({(error) -> Void in
                 if (error != nil) {
