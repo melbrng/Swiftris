@@ -43,8 +43,9 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     
     @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController)
     {
-        print("override")
-        
+        //do nothing for now as I just want to make sure I am returning to my origin MainVC instead of creating a new one
+        //print("gameCenterEnabled : " + String(gameCenterEnabled))
+        //print("leaderboardIdentifier : " + leaderboardIdentifier!)
     }
     
     func authenticateLocalPlayer()
