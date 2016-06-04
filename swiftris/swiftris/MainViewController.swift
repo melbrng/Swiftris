@@ -17,6 +17,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     var gameCenterEnabled:Bool! = false
     var leaderboardIdentifier:String?
     var localPlayer:GKLocalPlayer!
+    var currentScore:Int64 = 0
     
     override func viewDidLoad()
     {
@@ -36,17 +37,19 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
             
             if let gameViewController:GameViewController = segue.destinationViewController as? GameViewController
             {
-                reportGamesPlayed()
+                //set the currentScore because we are going to add to it after completion of a game
+                loadGamesPlayedScore()
                 gameViewController.gamePlay = gamePlaySegmentControl.selectedSegmentIndex
             }
         }
     }
     
-    //do nothing for now as I just want to make sure I am returning to my origin MainVC instead of creating a new one
+    
     @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController)
     {
-        //print("gameCenterEnabled : " + String(gameCenterEnabled))
-        //print("leaderboardIdentifier : " + leaderboardIdentifier!)
+        //increment (report) the gamePlayedScore after completion of a game
+        reportGamesPlayedScore()
+        
     }
     
     //authenticate player on GameKit, if authenticated get default leaderboardID
@@ -56,47 +59,47 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil)
-                {
-                    self.presentViewController(viewController!, animated: true, completion: nil)
-                }
+            {
+                self.presentViewController(viewController!, animated: true, completion: nil)
+            }
             else
-                {
-                    print("(GameCenter) Player authenticated: \(GKLocalPlayer.localPlayer().authenticated)")
-                    self.gameCenterEnabled = true
-                    
-                    // Get the default leaderboard
-                    self.localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
-                        if (error != nil)
-                        {
-                            print(error?.localizedDescription)
-                        }
-                        else
-                        {
-                            self.leaderboardIdentifier = leaderboardIdentifier!
+            {
+                print("(GameCenter) Player authenticated: \(GKLocalPlayer.localPlayer().authenticated)")
+                self.gameCenterEnabled = true
+                
+                // Get the default leaderboard
+                self.localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
+                    if (error != nil)
+                    {
+                        print(error?.localizedDescription)
+                    }
+                    else
+                    {
+                        self.leaderboardIdentifier = leaderboardIdentifier!
                         
-                        }
-                    });
-                }
-
+                    }
+                });
+            }
+            
         }
     }
     
     //present the GameCenter VC
     @IBAction func showGameCenter(sender: AnyObject)
     {
-
+        
         if gameCenterEnabled == true
         {
             let gcGameCenterViewController = GKGameCenterViewController()
             
             gcGameCenterViewController.gameCenterDelegate = self
-           
-            gcGameCenterViewController.viewState = GKGameCenterViewControllerState.Leaderboards
+            
+            gcGameCenterViewController.viewState = GKGameCenterViewControllerState.Default
             
             gcGameCenterViewController.leaderboardIdentifier = leaderboardIdentifier
-
+            
             presentViewController(gcGameCenterViewController, animated: true, completion: nil)
-
+            
         }
     }
     
@@ -106,13 +109,15 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //set score to 1 for each game played
-    func reportGamesPlayed()
+    //increment score by 1 for each game played
+    func reportGamesPlayedScore()
     {
+        
         if GKLocalPlayer.localPlayer().authenticated
         {
             let gkScore = GKScore(leaderboardIdentifier: leaderboardIdentifier!)
-            gkScore.value = 1
+            
+            gkScore.value = self.currentScore + 1
             GKScore.reportScores([gkScore], withCompletionHandler: ( { (error) -> Void in
                 if (error != nil)
                 {
@@ -123,6 +128,27 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
                     print("Score reported: \(gkScore.value)")
                 }
             }))
+        }
+    }
+    
+    func loadGamesPlayedScore()
+    {
+        
+        if GKLocalPlayer.localPlayer().authenticated
+        {
+            
+            // leaderboard for the current local player
+            let gkLeaderboard = GKLeaderboard(players: [GKLocalPlayer.localPlayer()])
+            gkLeaderboard.identifier = leaderboardIdentifier
+            
+            gkLeaderboard.loadScoresWithCompletionHandler({ (scores, error) -> Void in
+                var score: Int64 = 0
+                if error == nil
+                {
+                    score = (scores![0]).value
+                    self.currentScore = score
+                }
+            })
         }
     }
     
