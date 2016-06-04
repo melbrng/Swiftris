@@ -50,8 +50,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-kf-ZPG">
-                                <rect key="frame" x="163" y="540" width="30" height="30"/>
-                                <state key="normal" title="GC"/>
+                                <rect key="frame" x="133" y="540" width="91" height="30"/>
+                                <state key="normal" title="Game Center"/>
                                 <connections>
                                     <action selector="showGameCenter:" destination="0kq-bx-Gxb" eventType="touchUpInside" id="vAB-oK-wDo"/>
                                 </connections>
