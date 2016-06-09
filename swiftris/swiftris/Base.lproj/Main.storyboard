@@ -35,9 +35,6 @@
                                     <segment title="Classic"/>
                                     <segment title="Timed"/>
                                 </segments>
-                                <connections>
-                                    <action selector="gamePlaySegmentControl:" destination="0kq-bx-Gxb" eventType="valueChanged" id="3Vn-ra-juk"/>
-                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBD-eM-V43">
                                 <rect key="frame" x="155" y="278" width="46" height="30"/>

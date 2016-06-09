@@ -32,6 +32,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     //lets present the Game VC
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
+        
         if(segue.identifier == "showGameView")
         {
             
@@ -94,7 +95,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
             
             gcGameCenterViewController.gameCenterDelegate = self
             
-            gcGameCenterViewController.viewState = GKGameCenterViewControllerState.Default
+            gcGameCenterViewController.viewState = GKGameCenterViewControllerState.Achievements
             
             gcGameCenterViewController.leaderboardIdentifier = leaderboardIdentifier
             
