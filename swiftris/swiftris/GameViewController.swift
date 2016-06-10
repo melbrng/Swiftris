@@ -9,6 +9,7 @@
 
 import UIKit
 import SpriteKit
+import GameKit
 
 //A constant or variable of a certain class type may actually refer to an instance of a subclass behind the scenes. Where you believe this is the case, you can try to downcast to the subclass type with a type cast operator (as? or as!).
 //The forced form, as!, attempts the downcast and force-unwraps the result as a single compound action
@@ -32,6 +33,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     var gamePlay = 0
     var gamePlayTime = 0
     var startTime = NSTimeInterval()
+    
+    let rowsAddedAchievementString:String = "rows_completed"
     
     enum gamePlayEnum:Int
     {
@@ -185,7 +188,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
         {
-           print("gameDidEnd")
+        
         }
     }
     
@@ -194,7 +197,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     //as players level up will decrease tick level
     func gameDidLevelUp(swiftris: Swiftris)
     {
-        print("gameDidLevelUp")
         
         levelLabel.text = "\(swiftris.level)"
         
@@ -230,7 +232,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.stopTicking()
         
         // check for completed lines
-        // Add functionality here ?  for achievement
         let removedLines = swiftris.removeCompletedLines()
         
         // if lines were removed update score label to newest score and animate blocks with explosive animation
@@ -242,6 +243,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
                 // detect any new lines
                 self.gameShapeDidLand(swiftris)
             }
+            
+            // Update rowsAddedAchievement
+            updateRowsAddedAchievement(removedLines.linesRemoved.count)
+            
             scene.playSound("bomb.mp3")
         }
             //no new lines -- bring in next shape
@@ -334,6 +339,30 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.stopTicking()
         
         stopTimer()
+    }
+    
+    // MARK: Achievement
+    
+    func updateRowsAddedAchievement(linesRemovedCount: Int)
+    {
+        print("updateRowsAddedAchievement : " + String(linesRemovedCount))
+        let rowsAddedAchievement = GKAchievement(identifier: rowsAddedAchievementString)
+        
+        rowsAddedAchievement.percentComplete = Double(100)
+        rowsAddedAchievement.showsCompletionBanner = true
+        
+        GKAchievement.reportAchievements([rowsAddedAchievement], withCompletionHandler:( { (error) -> Void in
+            if (error != nil)
+            {
+                print("Error: " + (error?.localizedDescription)!)
+            }
+            else
+            {
+                print("Achievement reported")
+            }
+        }))
+
+        
     }
 
 }

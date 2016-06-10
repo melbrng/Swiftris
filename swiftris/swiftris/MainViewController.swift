@@ -27,6 +27,8 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         
         gamePlaySegmentControl.selectedSegmentIndex = 0
         
+        loadAchievements()
+        
     }
     
     //lets present the Game VC
@@ -157,6 +159,16 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
                     self.currentScore = score
                 }
             })
+        }
+    }
+    
+    func loadAchievements()
+    {
+        
+        GKAchievement.loadAchievementsWithCompletionHandler() { achievements, error in
+            guard let achievements = achievements else { return }
+            
+            print(achievements)
         }
     }
     
