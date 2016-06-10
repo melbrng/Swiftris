@@ -72,7 +72,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
                 self.localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier, error) in
                     if (error != nil)
                     {
-                        print(error?.localizedDescription)
+                        print("loadDefaultLeaderboardIdentifier : " + String(error?.localizedDescription))
                     }
                     else
                     {
@@ -146,7 +146,15 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
                 var score: Int64 = 0
                 if error == nil
                 {
-                    score = (scores![0]).value
+                    //check for value since scores is an optional
+                    if(scores != nil)
+                    {
+                        score = (scores![0]).value
+                    }
+                    else
+                    {
+                        score = 0
+                    }
                     self.currentScore = score
                 }
             })
