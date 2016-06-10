@@ -77,6 +77,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         return true
     }
     
+     // MARK: Gestures
+    
     @IBAction func didTap(sender: UITapGestureRecognizer)
     {
         swiftris.rotateShape()
@@ -120,6 +122,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
             ( gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UITapGestureRecognizer ) )
     }
     
+     // MARK: Game
     
     func didTick()
     {
@@ -182,7 +185,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //then destroy the remaining blocks on the screen
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks())
         {
-           
+           print("gameDidEnd")
         }
     }
     
@@ -191,6 +194,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     //as players level up will decrease tick level
     func gameDidLevelUp(swiftris: Swiftris)
     {
+        print("gameDidLevelUp")
+        
         levelLabel.text = "\(swiftris.level)"
         
         if scene.tickLengthMillis >= 100
@@ -225,6 +230,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.stopTicking()
         
         // check for completed lines
+        // Add functionality here ?  for achievement
         let removedLines = swiftris.removeCompletedLines()
         
         // if lines were removed update score label to newest score and animate blocks with explosive animation
