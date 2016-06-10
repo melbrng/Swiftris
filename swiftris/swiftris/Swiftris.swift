@@ -157,7 +157,10 @@ class Swiftris
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>)
     {
         var removedLines = Array<Array<Block>>()
-        for var row = NumRows - 1; row > 0; row -= 1
+        
+        for row in 1...NumRows-1
+
+       // for var row = NumRows - 1; row > 0; row -= 1
         {
             var rowOfBlocks = Array<Block>()
             

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4330C8B81D0B40DB009FAE3C /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C8B71D0B40DB009FAE3C /* GameKitHelper.swift */; };
 		438F64681CB45DCC00DFCB2A /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64671CB45DCC00DFCB2A /* Array2D.swift */; };
 		438F646A1CB4745800DFCB2A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F64691CB4745800DFCB2A /* Block.swift */; };
 		438F646C1CB478E000DFCB2A /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F646B1CB478E000DFCB2A /* Shape.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4330C8B71D0B40DB009FAE3C /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
 		438F64671CB45DCC00DFCB2A /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		438F64691CB4745800DFCB2A /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		438F646B1CB478E000DFCB2A /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
@@ -163,10 +165,11 @@
 		439E71751C77C9F00052530A /* swiftris */ = {
 			isa = PBXGroup;
 			children = (
-				439E717A1C77C9F00052530A /* GameScene.swift */,
 				439E71761C77C9F00052530A /* AppDelegate.swift */,
+				4330C8B71D0B40DB009FAE3C /* GameKitHelper.swift */,
 				43E8645D1CFB6A3200579423 /* MainViewController.swift */,
 				439E717C1C77C9F00052530A /* GameViewController.swift */,
+				439E717A1C77C9F00052530A /* GameScene.swift */,
 				438F64671CB45DCC00DFCB2A /* Array2D.swift */,
 				438F64691CB4745800DFCB2A /* Block.swift */,
 				438F647B1CB47FF100DFCB2A /* Swiftris.swift */,
@@ -368,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4330C8B81D0B40DB009FAE3C /* GameKitHelper.swift in Sources */,
 				438F64741CB47EA400DFCB2A /* LShape.swift in Sources */,
 				438F646E1CB47DCF00DFCB2A /* SquareShape.swift in Sources */,
 				439E717B1C77C9F00052530A /* GameScene.swift in Sources */,

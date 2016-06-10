@@ -31,6 +31,8 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         
     }
     
+    // MARK: Segue
+    
     //lets present the Game VC
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
@@ -54,6 +56,8 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         reportGamesPlayedScore()
         
     }
+    
+    // MARK: GameCenter
     
     //authenticate player on GameKit, if authenticated get default leaderboardID
     func authenticateLocalPlayer()
@@ -111,6 +115,8 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
     {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: Score & Achievements
     
     //increment score by 1 for each game played
     func reportGamesPlayedScore()

@@ -34,7 +34,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     var gamePlayTime = 0
     var startTime = NSTimeInterval()
     
-    let rowsAddedAchievementString:String = "rows_completed"
+    let rowsAddedAchievementString:String = "grp.rows_completed"
     
     enum gamePlayEnum:Int
     {
