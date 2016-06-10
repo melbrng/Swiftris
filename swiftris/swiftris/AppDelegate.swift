@@ -7,17 +7,20 @@
 //
 
 import UIKit
-import GameKit
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var gameKitHelper: GameKitHelper! = nil
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        gameKitHelper = GameKitHelper()
+        //gameKitHelper.authenticateLocalPlayer()
+        
         return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
