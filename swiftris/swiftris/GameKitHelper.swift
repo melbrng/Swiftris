@@ -112,14 +112,59 @@ class GameKitHelper {
         }
     }
     
+    // MARK: Achievement
+    
+    func updateRowsAddedAchievement(linesRemovedCount: Int)
+    {
+        print("updateRowsAddedAchievement : " + String(linesRemovedCount))
+        
+        let rows5AddedAchievement = GKAchievement(identifier: "grp.rows_completed")
+        let rows20AddedAchievement = GKAchievement(identifier: "grp.20_rows_completed")
+        let rows100AddedAchievement = GKAchievement(identifier: "grp.100_rows_completed")
+        
+        rows5AddedAchievement.percentComplete = Double(((linesRemovedCount * 4)/20)*100)
+        
+        print("percent : " + String(Double(((linesRemovedCount * 4)/20)*100)))
+        
+        rows5AddedAchievement.showsCompletionBanner = true
+        
+        GKAchievement.reportAchievements([rows5AddedAchievement], withCompletionHandler:( { (error) -> Void in
+            if (error != nil)
+            {
+                print("Error: " + (error?.localizedDescription)!)
+            }
+            else
+            {
+                print("Achievement reported")
+            }
+        }))
+        
+        
+    }
+    
     func loadAchievements()
     {
+        
         
         GKAchievement.loadAchievementsWithCompletionHandler() { achievements, error in
             guard let achievements = achievements else { return }
             
-            print(achievements)
+          //  if achievements.count > 0
+          //  {
+                let rowsCompleted: GKAchievement = achievements[0]
+                
+                print(String(rowsCompleted.percentComplete))
+                
+                print(achievements)
+          //  }
+            
         }
+    }
+    
+    func resetAchievements()
+    {
+        
+        GKAchievement.resetAchievementsWithCompletionHandler(nil)
     }
     
 

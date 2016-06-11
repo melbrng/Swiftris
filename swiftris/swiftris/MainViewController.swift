@@ -33,7 +33,7 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
         
         gamePlaySegmentControl.selectedSegmentIndex = 0
         
-        //loadAchievements()
+        //gameKitHelper.resetAchievements()
         
     }
     
@@ -185,14 +185,5 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
 //        }
 //    }
     
-    func loadAchievements()
-    {
-        
-        GKAchievement.loadAchievementsWithCompletionHandler() { achievements, error in
-            guard let achievements = achievements else { return }
-            
-            print(achievements)
-        }
-    }
     
 }

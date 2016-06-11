@@ -34,7 +34,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     var gamePlayTime = 0
     var startTime = NSTimeInterval()
     
-    let rowsAddedAchievementString:String = "grp.rows_completed"
+    var gameKitHelper:GameKitHelper! = nil
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     enum gamePlayEnum:Int
     {
@@ -46,6 +48,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     {
         super.viewDidLoad()
+        
+        gameKitHelper = appDelegate.gameKitHelper
+        
+        //gameKitHelper.loadAchievements()
         
         //set the limit on the gamePlay time if the user chooses classic or timed play
         gamePlayTime = setTheGamePlayTime()
@@ -233,6 +239,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
+        print(String(removedLines))
+       // gameKitHelper.updateRowsAddedAchievement(removedLines.linesRemoved.count)
         
         // if lines were removed update score label to newest score and animate blocks with explosive animation
         if removedLines.linesRemoved.count > 0
@@ -245,7 +253,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
             }
             
             // Update rowsAddedAchievement
-            updateRowsAddedAchievement(removedLines.linesRemoved.count)
+            gameKitHelper.updateRowsAddedAchievement(removedLines.linesRemoved.count)
             
             scene.playSound("bomb.mp3")
         }
@@ -341,28 +349,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         stopTimer()
     }
     
-    // MARK: Achievement
-    
-    func updateRowsAddedAchievement(linesRemovedCount: Int)
-    {
-        print("updateRowsAddedAchievement : " + String(linesRemovedCount))
-        let rowsAddedAchievement = GKAchievement(identifier: rowsAddedAchievementString)
-        
-        rowsAddedAchievement.percentComplete = Double(100)
-        rowsAddedAchievement.showsCompletionBanner = true
-        
-        GKAchievement.reportAchievements([rowsAddedAchievement], withCompletionHandler:( { (error) -> Void in
-            if (error != nil)
-            {
-                print("Error: " + (error?.localizedDescription)!)
-            }
-            else
-            {
-                print("Achievement reported")
-            }
-        }))
 
-        
-    }
 
 }
