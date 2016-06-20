@@ -10,8 +10,10 @@ import GameKit
 
 class GameKitHelper {
     
+    //singleton
     static let sharedInstance = GameKitHelper()
     
+    //override init so noone else can
     private init() {}
 
     var authenticationViewcontroller: UIViewController?
@@ -19,6 +21,8 @@ class GameKitHelper {
     var leaderboardIdentifier:String?
     var localPlayer:GKLocalPlayer!
     var currentScore:Int64 = 0
+    
+     // MARK: Authenticate player
     
     func authenticateLocalPlayer()
     {
@@ -131,10 +135,6 @@ class GameKitHelper {
         rows5AddedAchievement.percentComplete = Double((linesRemovedCount * 4)*100/20)
         rows20AddedAchievement.percentComplete = Double((linesRemovedCount * 3)*100/60)
         rows100AddedAchievement.percentComplete = Double((linesRemovedCount * 1)*100/100)
-        
-        print("percent : " + String(rows5AddedAchievement.percentComplete))
-        print("percent : " + String(rows20AddedAchievement.percentComplete))
-        print("percent : " + String(rows100AddedAchievement.percentComplete))
         
         rows5AddedAchievement.showsCompletionBanner = true
         rows20AddedAchievement.showsCompletionBanner = true
