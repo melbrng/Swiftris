@@ -21,15 +21,15 @@ class MainViewController: UIViewController,GKGameCenterControllerDelegate
 //    var currentScore:Int64 = 0
     var gameKitHelper:GameKitHelper! = nil
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+   // let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
     
-        gameKitHelper = appDelegate.gameKitHelper
+        //gameKitHelper = appDelegate.gameKitHelper
         
-        gameKitHelper.authenticateLocalPlayer()
+        GameKitHelper.sharedInstance.authenticateLocalPlayer()
         
         gamePlaySegmentControl.selectedSegmentIndex = 0
         

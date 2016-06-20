@@ -8,11 +8,15 @@
 
 import GameKit
 
-
 class GameKitHelper {
     
-    var authenticationViewcontroller: UIViewController?
+    static let sharedInstance = GameKitHelper()
     
+    private init() {
+        print(#function)
+    }
+
+    var authenticationViewcontroller: UIViewController?
     var gameCenterEnabled:Bool! = false
     var leaderboardIdentifier:String?
     var localPlayer:GKLocalPlayer!
@@ -118,20 +122,31 @@ class GameKitHelper {
     {
         print("updateRowsAddedAchievement : " + String(linesRemovedCount))
         
+        //achievements
+        //20 pts
         let rows5AddedAchievement = GKAchievement(identifier: "grp.rows_completed")
+        //60 pts
         let rows20AddedAchievement = GKAchievement(identifier: "grp.20_rows_completed")
+        //100 pts
         let rows100AddedAchievement = GKAchievement(identifier: "grp.100_rows_completed")
         
+        //calculate percent complete
         rows5AddedAchievement.percentComplete = Double(((linesRemovedCount * 4)/20)*100)
+        rows20AddedAchievement.percentComplete = Double(((linesRemovedCount * 3)/60)*100)
+        rows100AddedAchievement.percentComplete = Double(((linesRemovedCount * 1)/100)*100)
         
         print("percent : " + String(Double(((linesRemovedCount * 4)/20)*100)))
+        print("percent : " + String(Double(((linesRemovedCount * 3)/60)*100)))
+        print("percent : " + String(Double(((linesRemovedCount * 1)/100)*100)))
         
         rows5AddedAchievement.showsCompletionBanner = true
+        rows20AddedAchievement.showsCompletionBanner = true
+        rows100AddedAchievement.showsCompletionBanner = true
         
-        GKAchievement.reportAchievements([rows5AddedAchievement], withCompletionHandler:( { (error) -> Void in
+        GKAchievement.reportAchievements([rows5AddedAchievement,rows20AddedAchievement,rows100AddedAchievement], withCompletionHandler:( { (error) -> Void in
             if (error != nil)
             {
-                print("Error: " + (error?.localizedDescription)!)
+                print("Report Achievements Error: " + (error?.localizedDescription)!)
             }
             else
             {

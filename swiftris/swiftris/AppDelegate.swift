@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var gameKitHelper: GameKitHelper! = nil
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         // Override point for customization after application launch.
-        gameKitHelper = GameKitHelper()
-        //gameKitHelper.authenticateLocalPlayer()
+         //GameKitHelper.sharedInstance
         
         return true
         
