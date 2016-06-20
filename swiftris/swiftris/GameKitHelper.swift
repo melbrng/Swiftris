@@ -12,9 +12,7 @@ class GameKitHelper {
     
     static let sharedInstance = GameKitHelper()
     
-    private init() {
-        print(#function)
-    }
+    private init() {}
 
     var authenticationViewcontroller: UIViewController?
     var gameCenterEnabled:Bool! = false
@@ -28,7 +26,6 @@ class GameKitHelper {
         
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil)
-            //if let gameKitViewcontroller: UIViewController = viewController
             {
                 print("setAuthenticationViewController")
                 self.setAuthenticationViewController(viewController!)
@@ -131,13 +128,13 @@ class GameKitHelper {
         let rows100AddedAchievement = GKAchievement(identifier: "grp.100_rows_completed")
         
         //calculate percent complete
-        rows5AddedAchievement.percentComplete = Double(((linesRemovedCount * 4)/20)*100)
-        rows20AddedAchievement.percentComplete = Double(((linesRemovedCount * 3)/60)*100)
-        rows100AddedAchievement.percentComplete = Double(((linesRemovedCount * 1)/100)*100)
+        rows5AddedAchievement.percentComplete = Double((linesRemovedCount * 4)*100/20)
+        rows20AddedAchievement.percentComplete = Double((linesRemovedCount * 3)*100/60)
+        rows100AddedAchievement.percentComplete = Double((linesRemovedCount * 1)*100/100)
         
-        print("percent : " + String(Double(((linesRemovedCount * 4)/20)*100)))
-        print("percent : " + String(Double(((linesRemovedCount * 3)/60)*100)))
-        print("percent : " + String(Double(((linesRemovedCount * 1)/100)*100)))
+        print("percent : " + String(rows5AddedAchievement.percentComplete))
+        print("percent : " + String(rows20AddedAchievement.percentComplete))
+        print("percent : " + String(rows100AddedAchievement.percentComplete))
         
         rows5AddedAchievement.showsCompletionBanner = true
         rows20AddedAchievement.showsCompletionBanner = true
@@ -164,14 +161,14 @@ class GameKitHelper {
         GKAchievement.loadAchievementsWithCompletionHandler() { achievements, error in
             guard let achievements = achievements else { return }
             
-          //  if achievements.count > 0
-          //  {
+            if achievements.count > 0
+            {
                 let rowsCompleted: GKAchievement = achievements[0]
                 
                 print(String(rowsCompleted.percentComplete))
                 
                 print(achievements)
-          //  }
+            }
             
         }
     }
