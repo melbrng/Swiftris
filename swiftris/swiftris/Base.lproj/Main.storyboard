@@ -19,14 +19,14 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swiftris Plus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y90-8Q-lXn">
                                 <rect key="frame" x="90" y="132" width="176" height="29"/>
-                                <accessibility key="accessibilityConfiguration" label="Swiftris Plus"/>
+                                <accessibility key="accessibilityConfiguration" hint="The name of the game is Swiftris Plus" identifier="swiftrisPlusLabel" label="Swiftris Plus"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your gameplay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnl-VY-9e7">
                                 <rect key="frame" x="90" y="202" width="176" height="21"/>
-                                <accessibility key="accessibilityConfiguration" label="Choose your gameplay"/>
+                                <accessibility key="accessibilityConfiguration" hint="Choose classic or timed play" identifier="gamePlayLabel" label="Gameplay"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBD-eM-V43">
                                 <rect key="frame" x="155" y="278" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="deviceRGB"/>
-                                <accessibility key="accessibilityConfiguration" hint="Tap Play to start the game" label="Play "/>
+                                <accessibility key="accessibilityConfiguration" hint="double tap to start the game" identifier="playLabel" label="Play "/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Play"/>
@@ -51,6 +51,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-kf-ZPG">
                                 <rect key="frame" x="133" y="540" width="91" height="30"/>
+                                <accessibility key="accessibilityConfiguration" hint="doubletap to access the Game Center" identifier="gameCenterLabel" label="GameCenter"/>
                                 <state key="normal" title="Game Center"/>
                                 <connections>
                                     <action selector="showGameCenter:" destination="0kq-bx-Gxb" eventType="touchUpInside" id="vAB-oK-wDo"/>
