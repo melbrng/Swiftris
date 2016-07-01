@@ -56,6 +56,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         //because SKView is a subclass of View , downcast in order to be able to access properties
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
+
+        skView.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
+        skView.isAccessibilityElement = true
         
         // Create and configure the scene
         scene = GameScene(size: skView.bounds.size)
