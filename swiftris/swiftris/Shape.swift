@@ -238,10 +238,17 @@ enum Orientation: Int, CustomStringConvertible
                 return ZShape(column:startingColumn, row:startingRow)
             }
         }
+        
+        func verbalDescription() -> String {
+            
+            return "Shape"
+        }
     }
     
     func ==(lhs: Shape, rhs: Shape) -> Bool
     {
         return lhs.row == rhs.row && lhs.column == rhs.column
     }
+
+
 

@@ -52,4 +52,8 @@ class SShape:Shape {
             Orientation.TwoSeventy: [blocks[FirstBlockIdx], blocks[ThirdBlockIdx], blocks[FourthBlockIdx]]
         ]
     }
+    
+    override func verbalDescription() -> String {
+        return "S"
+    }
 }
