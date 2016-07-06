@@ -57,6 +57,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
 
+        //allow touch interaction with the view when voiceover is enabled
         skView.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
         skView.isAccessibilityElement = true
         
