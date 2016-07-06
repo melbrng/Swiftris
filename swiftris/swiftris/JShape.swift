@@ -56,6 +56,6 @@ class JShape:Shape {
     }
     
     override func verbalDescription() -> String {
-        return "J"
+        return "J Shape"
     }
 }

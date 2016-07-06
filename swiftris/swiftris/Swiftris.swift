@@ -63,6 +63,8 @@ class Swiftris
         if (nextShape == nil)
         {
             nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
+            
+            //nextShape?.verbalDescription()
         }
         
         delegate?.gameDidBegin(self)
@@ -159,8 +161,6 @@ class Swiftris
         var removedLines = Array<Array<Block>>()
         
         for row in 1...NumRows-1
-
-       // for var row = NumRows - 1; row > 0; row -= 1
         {
             var rowOfBlocks = Array<Block>()
             
@@ -210,7 +210,8 @@ class Swiftris
             
             // count upwards from lower left and above bottom most removed line, count upwards to top of game board 
             // take each remaining block we find on game board and lower it as far as possible
-            for var row = removedLines[0][0].row - 1; row > 0; row -= 1
+            
+            for row in 1...removedLines[0][0].row - 1
             {
                 guard let block = blockArray[column, row] else
                 {

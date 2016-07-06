@@ -44,6 +44,6 @@ class LineShape:Shape {
     }
     
     override func verbalDescription() -> String {
-        return "Line"
+        return "Line Shape"
     }
 }

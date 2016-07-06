@@ -54,6 +54,6 @@ class SShape:Shape {
     }
     
     override func verbalDescription() -> String {
-        return "S"
+        return "S Shape"
     }
 }

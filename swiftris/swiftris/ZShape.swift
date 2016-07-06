@@ -55,6 +55,6 @@ class ZShape:Shape {
     }
     
     override func verbalDescription() -> String {
-        return "Z"
+        return "Z Shape"
     }
 }

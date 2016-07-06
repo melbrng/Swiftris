@@ -133,7 +133,9 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         swiftris.letShapeFall()
         swiftris.fallingShape?.lowerShapeByOneRow()
+
         
+        // TODO: appropriate code
         //crash fix, check for optional value
         if(swiftris.fallingShape != nil)
         {
@@ -143,6 +145,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     func nextShape() {
         let newShapes = swiftris.newShape()
+        
+        //announce the shape in play
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,newShapes.fallingShape?.verbalDescription())
+        
         guard let fallingShape = newShapes.fallingShape else {
             return
         }
@@ -166,8 +172,10 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil
         {
+
             scene.addPreviewShapeToScene(swiftris.nextShape!)
             {
+                
                 self.nextShape()
             }
         }
@@ -217,7 +225,6 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     //hear efforts
     func gameShapeDidDrop(swiftris: Swiftris)
     {
-        
         scene.stopTicking()
         
         scene.redrawShape(swiftris.fallingShape!)
@@ -232,10 +239,12 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func gameShapeDidLand(swiftris: Swiftris)
     {
         scene.stopTicking()
+        //work when I disable new shapes in play--these announcements are happening at the same time so one overrides the other
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,"Shape landed")
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
-        print(String(removedLines))
+        //print(String(removedLines))
         
         // if lines were removed update score label to newest score and animate blocks with explosive animation
         if removedLines.linesRemoved.count > 0
@@ -255,12 +264,14 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
             //no new lines -- bring in next shape
         else
         {
+            
             nextShape()
         }
     }
     
     func gameShapeDidMove(swiftris: Swiftris)
     {
+        
         scene.redrawShape(swiftris.fallingShape!) {}
     }
     

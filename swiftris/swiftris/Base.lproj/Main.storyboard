@@ -19,7 +19,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swiftris Plus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y90-8Q-lXn">
                                 <rect key="frame" x="90" y="132" width="176" height="29"/>
-                                <accessibility key="accessibilityConfiguration" hint="The name of the game is Swiftris Plus" identifier="swiftrisPlusLabel" label="Swiftris Plus"/>
+                                <accessibility key="accessibilityConfiguration" identifier="swiftrisPlusLabel" label="Swiftris Plus"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

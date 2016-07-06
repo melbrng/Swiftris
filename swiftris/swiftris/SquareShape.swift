@@ -42,6 +42,6 @@ class SquareShape:Shape
     }
     
     override func verbalDescription() -> String {
-        return "Square"
+        return "Square Shape"
     }
 }
