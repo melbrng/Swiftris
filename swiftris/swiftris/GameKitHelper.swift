@@ -31,7 +31,6 @@ class GameKitHelper {
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil)
             {
-                print("setAuthenticationViewController")
                 self.setAuthenticationViewController(viewController!)
             }
             else
@@ -60,8 +59,6 @@ class GameKitHelper {
     func setAuthenticationViewController(authentication: UIViewController)
     {
         authenticationViewcontroller = authentication
-        
-        print("debugDescription : " + authenticationViewcontroller.debugDescription)
 
     }
     
@@ -121,7 +118,6 @@ class GameKitHelper {
     
     func updateRowsAddedAchievement(linesRemovedCount: Int)
     {
-        print("updateRowsAddedAchievement : " + String(linesRemovedCount))
         
         //achievements
         //20 pts
