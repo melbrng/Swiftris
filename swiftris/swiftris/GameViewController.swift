@@ -146,8 +146,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func nextShape() {
         let newShapes = swiftris.newShape()
         
-        //announce the shape in play
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,newShapes.fallingShape?.verbalDescription())
+        //announce the shape in play for voiceover
+        announce((newShapes.fallingShape?.verbalDescription())!)
         
         guard let fallingShape = newShapes.fallingShape else {
             return
@@ -240,7 +240,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         scene.stopTicking()
         //work when I disable new shapes in play--these announcements are happening at the same time so one overrides the other
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,"Shape landed")
+        announce("Shape landed")
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
@@ -353,6 +353,17 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         scene.stopTicking()
         
         stopTimer()
+    }
+    
+    // MARK: Voiceover
+    
+    func announce(announcement : String) {
+        
+        if(UIAccessibilityIsVoiceOverRunning() == true){
+            
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,announcement)
+            
+        }
     }
     
 
