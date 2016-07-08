@@ -95,7 +95,18 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     
     @IBAction func didPan(sender: UIPanGestureRecognizer)
     {
+
         let currentPoint = sender.translationInView(self.view)
+        let detectEdge = swiftris.detectIllegalPlacement().edgeColumn
+        
+        //detect which edge and announce
+        if(detectEdge == "Left"){
+            announce("Left Edge")
+        }
+        else if (detectEdge == "Right"){
+            announce("Right Edge")
+        }
+        
         if let originalPoint = panPointReference {
             
             if abs(currentPoint.x - originalPoint.x) > (BlockSize * 0.9) {
@@ -146,7 +157,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
         let newShapes = swiftris.newShape()
         
         //announce the shape in play for voiceover
-        //announce((newShapes.fallingShape?.verbalDescription())!)
+        announce((newShapes.fallingShape?.verbalDescription())!)
         
         guard let fallingShape = newShapes.fallingShape else {
             return
@@ -239,7 +250,7 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     {
         scene.stopTicking()
         //work when I disable new shapes in play--these announcements are happening at the same time so one overrides the other
-        //announce("Shape landed")
+        announce("Shape landed")
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()

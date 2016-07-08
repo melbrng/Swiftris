@@ -51,6 +51,13 @@ class Swiftris
     var level = 1
     var timer = "00:00"
     
+    enum Edge : String
+    {
+        case Left = "Left"
+        case Right = "Right"
+        case Middle = "Middle"
+    }
+    
     init()
     {
         fallingShape = nil
@@ -64,7 +71,6 @@ class Swiftris
         {
             nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
             
-            //nextShape?.verbalDescription()
         }
         
         delegate?.gameDidBegin(self)
@@ -78,7 +84,7 @@ class Swiftris
         nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
         fallingShape?.moveTo(StartingColumn, row: StartingRow)
         
-        guard detectIllegalPlacement() == false else
+        guard detectIllegalPlacement().illegal == false else
         {
             nextShape = fallingShape
             nextShape!.moveTo(PreviewColumn, row: PreviewRow)
@@ -91,25 +97,39 @@ class Swiftris
     
     
     //checks block boundary conditions
-    func detectIllegalPlacement() -> Bool
+    //lets return the shape column to detect when we pan the shape to the edges
+    func detectIllegalPlacement() -> (illegal : Bool, edgeColumn : String)
     {
+        var x = Edge.Middle.rawValue
+        
         guard let shape = fallingShape else
         {
-            return false
+            return (false,x)
         }
+
         
         for block in shape.blocks
         {
+            //lets check to see if we have moved the piece to the right or left edge of the view 
+            if(block.column == 0)
+            {
+                x = Edge.Left.rawValue
+            }
+            else if (block.column == 9)
+            {
+                x = Edge.Right.rawValue
+            }
+            
             if block.column < 0 || block.column >= NumColumns || block.row < 0 || block.row >= NumRows
             {
-                return true
+                return (true,x)
             }
             else if blockArray[block.column,block.row] != nil
             {
-                return true
+                return (true,x)
             }
         }
-        return false
+        return (false,x)
     }
 
     //adds the falling shape to the collection of blocks maintained by Swiftris
@@ -244,7 +264,7 @@ class Swiftris
         guard let shape = fallingShape else {
             return
         }
-        while detectIllegalPlacement() == false {
+        while detectIllegalPlacement().illegal == false {
             shape.lowerShapeByOneRow()
         }
         shape.raiseShapeByOneRow()
@@ -260,10 +280,10 @@ class Swiftris
         }
         
         shape.lowerShapeByOneRow()
-        if detectIllegalPlacement()
+        if detectIllegalPlacement().illegal
         {
             shape.raiseShapeByOneRow()
-            if detectIllegalPlacement()
+            if detectIllegalPlacement().illegal
             {
                 endGame()
             }
@@ -292,7 +312,7 @@ class Swiftris
         }
         
         shape.rotateClockwise()
-        guard detectIllegalPlacement() == false else
+        guard detectIllegalPlacement().illegal == false else
         {
             shape.rotateCounterClockwise()
             return
@@ -310,7 +330,7 @@ class Swiftris
         }
         
         shape.shiftLeftByOneColumn()
-        guard detectIllegalPlacement() == false else
+        guard detectIllegalPlacement().illegal == false else
         {
             shape.shiftRightByOneColumn()
             return
@@ -327,7 +347,7 @@ class Swiftris
         }
         shape.shiftRightByOneColumn()
         
-        guard detectIllegalPlacement() == false else
+        guard detectIllegalPlacement().illegal == false else
         {
             shape.shiftLeftByOneColumn()
             return

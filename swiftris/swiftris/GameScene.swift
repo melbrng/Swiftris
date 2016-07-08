@@ -26,7 +26,7 @@ import SpriteKit
 
 //SLOWEST speed at which our shapes will travel
 //every 6/10th of a second our shape should descend by one row
-let TickLengthLevelOne = NSTimeInterval(600)
+let TickLengthLevelOne = NSTimeInterval(1000)
 
 let BlockSize:CGFloat = 25.0
 
