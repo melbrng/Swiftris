@@ -230,7 +230,7 @@ class GameScene: SKScene
     func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
         
         //determine how long to wait before calling completion closure
-        var longestDuration: NSTimeInterval = 0
+        var longestDuration: NSTimeInterval = 3
         
         // iterate column by column
         for (columnIdx, column) in fallenBlocks.enumerate() {

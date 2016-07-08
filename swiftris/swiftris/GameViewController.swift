@@ -249,21 +249,19 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func gameShapeDidLand(swiftris: Swiftris)
     {
         scene.stopTicking()
-        //work when I disable new shapes in play--these announcements are happening at the same time so one overrides the other
-        announce("Shape landed")
         
         // check for completed lines
         let removedLines = swiftris.removeCompletedLines()
-        
+
         // if lines were removed update score label to newest score and animate blocks with explosive animation
         if removedLines.linesRemoved.count > 0
         {
+            //lets announce for voiceover
+            self.announce("Lines Removed")
             
             self.scoreLabel.text = "\(swiftris.score)"
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks)
             {
-                //lets announce for voiceover
-                self.announce("Lines Removed")
                 
                 // detect any new lines
                 self.gameShapeDidLand(swiftris)
@@ -373,8 +371,8 @@ class GameViewController: UIViewController, SwiftrisDelegate,UIGestureRecognizer
     func announce(announcement : String) {
         
         if(UIAccessibilityIsVoiceOverRunning() == true){
+             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,announcement)
             
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification,announcement)
             
         }
     }
